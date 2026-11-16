@@ -33,13 +33,13 @@
   .subtitle { font-size: 18px; color: #8a2be2; text-align: center; margin-bottom: 20px; font-weight: 700; }
   @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  /* Карусель (ИСПРАВЛЕНА ДЛЯ ТЕЛЕФОНОВ) */
+  /* Карусель */
   .carousel { background: #fff; border-radius: 20px; padding: 15px; box-shadow: 0 10px 30px rgba(255,105,180,0.3); border: 3px dashed #ffb6d9; position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
   .carousel-window { overflow: hidden; border-radius: 15px; width: 100%; height: 50vh; min-height: 220px; max-height: 500px; background: #f8f8f8; display: flex; align-items: center; justify-content: center; }
   .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
   .carousel-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
   .carousel-slide img { width: 100%; height: 100%; object-fit: contain; border-radius: 15px; }
-  .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(255,105,180,0.9)); color: #fff; padding: 25px 15px 15px; border-radius: 0 0 15px 15px; font-weight: 700; font-size: 16px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); text-align: center; }
+  .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(255,105,180,0.9)); color: #fff; padding: 25px 15px 15px; border-radius: 0 0 15px 15px; font-weight: 700; font-size: 16px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); text-align: center; z-index: 10; }
   
   /* Кнопки карусели */
   .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #ff69b4; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 4px 10px rgba(255,105,180,0.5); transition: all 0.3s; z-index: 10; display: flex; align-items: center; justify-content: center; }
@@ -50,27 +50,30 @@
   .dot { width: 12px; height: 12px; border-radius: 50%; background: #ffb6d9; border: none; cursor: pointer; transition: all 0.3s; }
   .dot.active { background: #ff69b4; transform: scale(1.3); }
 
-  /* Карточки и контент */
-  .info-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 6px 15px rgba(138,43,226,0.15); border-left: 6px solid #ff69b4; max-width: 800px; width: 100%; margin-bottom: 20px; transition: transform 0.3s; }
+  /* Карточки */
+  .info-card { background: #fff; border-radius: 15px; padding: 30px; box-shadow: 0 6px 15px rgba(138,43,226,0.15); border-left: 6px solid #ff69b4; max-width: 800px; width: 100%; margin-bottom: 20px; transition: transform 0.3s; }
   .info-card:hover { transform: translateY(-3px) rotate(-0.5deg); }
-  .info-card h3 { font-family: 'Pacifico', cursive; color: #ff69b4; margin-bottom: 10px; font-size: 26px; }
-  .info-card p { font-size: 18px; line-height: 1.6; color: #555; }
+  .info-card h3 { font-family: 'Pacifico', cursive; color: #ff69b4; margin-bottom: 15px; font-size: 28px; }
+  .info-card p { font-size: 20px; line-height: 1.8; color: #444; margin-bottom: 15px; text-align: justify; }
   .nyan { display: block; text-align: right; color: #ff69b4; font-weight: 900; font-style: italic; margin-top: 8px; font-size: 20px; }
   .page-img { max-width: 600px; width: 100%; border-radius: 20px; box-shadow: 0 10px 25px rgba(255,105,180,0.4); border: 4px solid #fff; margin-bottom: 20px; max-height: 45vh; object-fit: contain; }
 
-  /* Котик и стрелка */
+  /* КОТИК, СТРЕЛКА И ПОДПИСЬ */
   .cat-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
   .cat-img { max-width: 250px; width: 100%; border-radius: 20px; animation: wave 1.5s ease-in-out infinite; transform-origin: bottom center; }
-  .arrow-pointer { display: flex; flex-direction: column; align-items: center; margin-top: 10px; animation: jumpArrow 1s infinite alternate; }
+  
+  .arrow-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; opacity: 0; transform: translateY(10px); animation: arrowAppear 1.5s ease-out 0.5s forwards, floatArrow 2s ease-in-out infinite 2s; }
   .arrow-text { font-family: 'Pacifico', cursive; font-size: 24px; color: #ff69b4; text-shadow: 2px 2px 0 #fff; margin-bottom: 5px; }
-  .arrow-line { font-size: 26px; color: #ff1493; line-height: 1; }
-  @keyframes jumpArrow { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
+  .arrow-line { font-size: 30px; color: #ff1493; line-height: 1; font-weight: bold; }
+  
+  @keyframes arrowAppear { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes floatArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   @keyframes wave { 0%, 100% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-8deg) translateY(-5px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(8deg) translateY(-5px); } }
 
   /* Финальный баннер */
   .final-banner { background: linear-gradient(135deg, #ff69b4, #8a2be2, #00bfff); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 10px 40px rgba(138,43,226,0.4); animation: pulse 2s infinite; max-width: 800px; width: 100%; }
   .final-banner h2 { color: #fff; text-shadow: 2px 2px 0 #ff1493; margin-bottom: 15px; animation: glow 1.5s infinite alternate; font-size: clamp(24px, 4vw, 36px); }
-  .final-banner p { color: #fff; font-size: 18px; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+  .final-banner p { color: #fff; font-size: 18px; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin-bottom: 10px; }
   .download-btn { display: inline-block; margin-top: 15px; background: #fff; color: #ff1493; padding: 12px 30px; border-radius: 50px; font-weight: 900; font-size: 18px; text-decoration: none; box-shadow: 0 6px 0 #ff1493; transition: all 0.2s; }
   .download-btn:hover { transform: translateY(4px); box-shadow: 0 2px 0 #ff1493; }
 
@@ -88,10 +91,11 @@
   .easter-egg img { max-width: 90%; max-height: 90%; border-radius: 15px; box-shadow: 0 0 30px #ff69b4; }
   @keyframes glow { from { text-shadow: 2px 2px 0 #ff1493, 0 0 10px #fff; } to { text-shadow: 2px 2px 0 #ff1493, 0 0 20px #fff, 0 0 30px #ff69b4; } }
 
-  /* Медиа-запрос для мобильных */
+  /* Мобильная версия */
   @media (max-width: 600px) {
     .carousel-window { height: 40vh; min-height: 180px; }
-    .info-card p { font-size: 16px; }
+    .info-card { padding: 20px; }
+    .info-card p { font-size: 18px; }
     .carousel { padding: 10px; }
     .page { padding: 30px 10px; }
   }
@@ -114,10 +118,22 @@
   <div class="carousel">
     <div class="carousel-window">
       <div class="carousel-track" id="track">
-        <div class="carousel-slide"><img src="./1.jpg" alt="Овечкин 1"><div class="slide-caption" data-ru="Слайд 1 — Чёрная джерси. Стильно и строго. ✨" data-en="Slide 1 — Black jersey. ✨">Слайд 1 — Чёрная джерси. Стильно и строго. ✨</div></div>
-        <div class="carousel-slide"><img src="./2.jpg" alt="Овечкин 2"><div class="slide-caption" data-ru="Слайд 2 — Красная джерси и улыбка. 💖" data-en="Slide 2 — Red jersey and a smile. 💖">Слайд 2 — Красная джерси и улыбка. 💖</div></div>
-        <div class="carousel-slide"><img src="./3.jpg" alt="Овечкин 3"><div class="slide-caption" data-ru="Слайд 3 — В игре он сосредоточен. 🔥" data-en="Slide 3 — Focused in the game. 🔥">Слайд 3 — В игре он сосредоточен. 🔥</div></div>
-        <div class="carousel-slide"><img src="./4.jpg" alt="Овечкин 4"><div class="slide-caption" data-ru="Слайд 4 — Смеётся, и на душе теплеет. 🎀" data-en="Slide 4 — When he laughs, it warms the soul. 🎀">Слайд 4 — Смеётся, и на душе теплеет. 🎀</div></div>
+        <div class="carousel-slide">
+          <img src="./1.jpg" alt="Овечкин 1">
+          <div class="slide-caption" data-ru="Слайд 1 — Чёрная джерси. Стильно и строго. ✨" data-en="Slide 1 — Black jersey. ✨">Слайд 1 — Чёрная джерси. Стильно и строго. ✨</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./2.jpg" alt="Овечкин 2">
+          <div class="slide-caption" data-ru="Слайд 2 — Красная джерси и улыбка. 💖" data-en="Slide 2 — Red jersey and a smile. 💖">Слайд 2 — Красная джерси и улыбка. 💖</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./3.jpg" alt="Овечкин 3">
+          <div class="slide-caption" data-ru="Слайд 3 — В игре он сосредоточен. 🔥" data-en="Slide 3 — Focused in the game. 🔥">Слайд 3 — В игре он сосредоточен. 🔥</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./4.jpg" alt="Овечкин 4">
+          <div class="slide-caption" data-ru="Слайд 4 — Смеётся, и на душе теплеет. 🎀" data-en="Slide 4 — When he laughs, it warms the soul. 🎀">Слайд 4 — Смеётся, и на душе теплеет. 🎀</div>
+        </div>
       </div>
     </div>
     <button class="nav-btn prev" onclick="moveSlide(-1)">‹</button>
@@ -130,7 +146,7 @@
   <h2 data-ru="Страница 2 — Кто он такой? 💫" data-en="Page 2 — Who is he? 💫">Страница 2 — Кто он такой? 💫</h2>
   <div class="info-card">
     <h3 data-ru="Александр Овечкин" data-en="Alexander Ovechkin">Александр Овечкин</h3>
-    <p data-ru="Капитан «Вашингтон Кэпиталз», обладатель Кубка Стэнли и один из лучших снайперов в истории НХЛ. Сочетает силу, характер и обаяние." data-en="Captain of the Washington Capitals, Stanley Cup champion, and one of the best snipers in NHL history. Combines strength, character, and charisma.">Капитан «Вашингтон Кэпиталз», обладатель Кубка Стэнли и один из лучших снайперов в истории НХЛ. Сочетает силу, характер и обаяние.</p>
+    <p data-ru="Александр Овечкин — это имя, которое знает каждый любитель хоккея. Он является капитаном команды «Вашингтон Кэпиталз» и настоящим лидером на льду. За свою карьеру он сумел завоевать Кубок Стэнли, став легендой для миллионов фанатов. Его стиль игры сочетает в себе невероятную мощь и точность броска. Болельщики обожают его не только за голы, но и за невероятную харизму. Овечкин — это человек, который изменил представление о современном хоккее. Кстати, мало кто знает, что в детстве Александр мечтал стать футболистом, но судьба распорядилась иначе, подарив миру великого хоккеиста." data-en="Alexander Ovechkin is a name that every hockey fan knows. He is the captain of the Washington Capitals and a true leader on the ice. Over his career, he has won the Stanley Cup, becoming a legend for millions of fans. His playing style combines incredible power and shooting accuracy. Fans adore him not only for his goals but also for his incredible charisma. Ovechkin is a man who changed the idea of modern hockey. By the way, few people know that in childhood Alexander dreamed of becoming a football player, but fate decided otherwise, giving the world a great hockey player.">Александр Овечкин — это имя, которое знает каждый любитель хоккея. Он является капитаном команды «Вашингтон Кэпиталз» и настоящим лидером на льду. За свою карьеру он сумел завоевать Кубок Стэнли, став легендой для миллионов фанатов. Его стиль игры сочетает в себе невероятную мощь и точность броска. Болельщики обожают его не только за голы, но и за невероятную харизму. Овечкин — это человек, который изменил представление о современном хоккее. Кстати, мало кто знает, что в детстве Александр мечтал стать футболистом, но судьба распорядилась иначе, подарив миру великого хоккеиста.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -139,7 +155,7 @@
   <h2 data-ru="Страница 3 — В деле 🔥" data-en="Page 3 — In Action 🔥">Страница 3 — В деле 🔥</h2>
   <div class="info-card">
     <h3 data-ru="На льду" data-en="On the Ice">На льду</h3>
-    <p data-ru="Уверен, быстр и точен. Каждое движение — работа и харизма. Даже борода уложена идеально." data-en="Confident, fast, and accurate. Even his beard is perfectly styled.">Уверен, быстр и точен. Каждое движение — работа и харизма. Даже борода уложена идеально.</p>
+    <p data-ru="Когда Овечкин выходит на лед, он полностью сосредоточен на игре. Каждое его движение отточено до идеала благодаря годам тренировок. Его мощные броски и умение находить свободные зоны пугают вратарей соперников. Даже его борода выглядит так, будто он готовится к решающему матчу. Он никогда не останавливается на достигнутом и постоянно работает над собой. Именно поэтому он остается одним из лучших игроков своего поколения. Интересно, что его любимый прием — это бросок из левого круга вбрасывания, который вратари просто не успевают отразить." data-en="When Ovechkin steps on the ice, he is completely focused on the game. Every move is refined to perfection thanks to years of training. His powerful shots and ability to find open zones terrify opposing goalies. Even his beard looks like he's preparing for a decisive match. He never rests on his laurels and constantly works on himself. That is why he remains one of the best players of his generation. It is interesting that his favorite move is a shot from the left faceoff circle, which goalies simply do not have time to react to.">Когда Овечкин выходит на лед, он полностью сосредоточен на игре. Каждое его движение отточено до идеала благодаря годам тренировок. Его мощные броски и умение находить свободные зоны пугают вратарей соперников. Даже его борода выглядит так, будто он готовится к решающему матчу. Он никогда не останавливается на достигнутом и постоянно работает над собой. Именно поэтому он остается одним из лучших игроков своего поколения. Интересно, что его любимый прием — это бросок из левого круга вбрасывания, который вратари просто не успевают отразить.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -148,7 +164,7 @@
   <h2 data-ru="Страница 4 — Статистика 🏒" data-en="Page 4 — Statistics 🏒">Страница 4 — Статистика 🏒</h2>
   <div class="info-card">
     <h3 data-ru="Цифры" data-en="The Numbers">Цифры</h3>
-    <p data-ru="Более 800 голов за карьеру в НХЛ, десятки рекордов и один Кубок Стэнли. Легенда, которая пишет историю." data-en="Over 800 career NHL goals, dozens of records, and one Stanley Cup. A legend writing history.">Более 800 голов за карьеру в НХЛ, десятки рекордов и один Кубок Стэнли. Легенда, которая пишет историю.</p>
+    <p data-ru="Статистика Овечкина впечатляет даже самых искушенных экспертов. На его счету более 800 голов в регулярных чемпионатах НХЛ, что ставит его в один ряд с великими. Он является обладателем множества индивидуальных наград и рекордов лиги. Каждый сезон он продолжает доказывать, что возраст — это всего лишь цифра. Его голы входят в учебники по хоккею и вдохновляют молодых спортсменов. Это настоящая легенда, которая продолжает писать историю прямо на наших глазах. Для сравнения, чтобы забить столько голов, нужно было бы делать по одному точному броску каждый день на протяжении более двух лет без перерывов!" data-en="Ovechkin's statistics impress even the most sophisticated experts. He has over 800 goals in NHL regular seasons, putting him in the same league as the greats. He holds numerous individual awards and league records. Every season he continues to prove that age is just a number. His goals are in hockey textbooks and inspire young athletes. This is a true legend who continues to write history right before our eyes. For comparison, to score that many goals, you would have to make one accurate shot every day for more than two years without breaks!">Статистика Овечкина впечатляет даже самых искушенных экспертов. На его счету более 800 голов в регулярных чемпионатах НХЛ, что ставит его в один ряд с великими. Он является обладателем множества индивидуальных наград и рекордов лиги. Каждый сезон он продолжает доказывать, что возраст — это всего лишь цифра. Его голы входят в учебники по хоккею и вдохновляют молодых спортсменов. Это настоящая легенда, которая продолжает писать историю прямо на наших глазах. Для сравнения, чтобы забить столько голов, нужно было бы делать по одному точному броску каждый день на протяжении более двух лет без перерывов!</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -158,7 +174,7 @@
   <img src="./5.jpg" alt="Овечкин" class="page-img">
   <div class="info-card">
     <h3 data-ru="Сезоны за плечами" data-en="Seasons Behind">Сезоны за плечами</h3>
-    <p data-ru="Каждая игра, каждый гол — это опыт. Он знает, как побеждать, и передаёт это молодым." data-en="Every game, every goal is experience. He knows how to win and passes it on to the young ones.">Каждая игра, каждый гол — это опыт. Он знает, как побеждать, и передаёт это молодым.</p>
+    <p data-ru="С каждым проведенным сезоном Овечкин становится только мудрее. Он понимает игру на таком уровне, который доступен лишь единицам. Каждая игра и каждый забитый гол добавляют ему уверенности и опыта. Он знает, как побеждать в самых сложных ситуациях и как поддержать команду. Молодые игроки часто обращаются к нему за советом, и он всегда готов помочь. Этот опыт делает его не просто игроком, а настоящим наставником для всей команды. Говорят, что в раздевалке он часто берет на себя роль психолога, подбадривая партнеров после неудач." data-en="With every season, Ovechkin becomes wiser. He understands the game at a level that only a few can reach. Every game and every goal adds to his confidence and experience. He knows how to win in the most difficult situations and how to support the team. Young players often turn to him for advice, and he is always ready to help. This experience makes him not just a player, but a true mentor for the whole team. They say that in the locker room, he often takes on the role of a psychologist, cheering up his teammates after failures.">С каждым проведенным сезоном Овечкин становится только мудрее. Он понимает игру на таком уровне, который доступен лишь единицам. Каждая игра и каждый забитый гол добавляют ему уверенности и опыта. Он знает, как побеждать в самых сложных ситуациях и как поддержать команду. Молодые игроки часто обращаются к нему за советом, и он всегда готов помочь. Этот опыт делает его не просто игроком, а настоящим наставником для всей команды. Говорят, что в раздевалке он часто берет на себя роль психолога, подбадривая партнеров после неудач.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -167,7 +183,7 @@
   <h2 data-ru="Страница 6 — Вне льда 🎀" data-en="Page 6 — Off the Ice 🎀">Страница 6 — Вне льда 🎀</h2>
   <div class="info-card">
     <h3 data-ru="Улыбка и седина" data-en="Smile and Grey Hair">Улыбка и седина</h3>
-    <p data-ru="Он умеет быть серьёзным и забавным одновременно. Легенда, которая остаётся собой." data-en="He can be serious and funny at the same time. A legend who stays true to himself.">Он умеет быть серьёзным и забавным одновременно. Легенда, которая остаётся собой.</p>
+    <p data-ru="Вне льда Овечкин — это невероятно обаятельный и веселый человек. Он умеет быть серьезным на площадке, но за ее пределами всегда готов пошутить. Седина на его висках только добавляет ему шарма и мудрости. Он обожает проводить время с семьей и друзьями, ценя каждое мгновение. Болельщики любят его за то, что он остается настоящим, несмотря на мировую славу. Его улыбка способна растопить лед не хуже, чем его знаменитый бросок. Однажды он признался, что самый большой страх в его жизни — это не проигрыш, а остаться без сладкого на ночь!" data-en="Off the ice, Ovechkin is an incredibly charming and cheerful person. He can be serious on the rink, but outside of it, he is always ready to joke. The grey hair on his temples only adds to his charm and wisdom. He loves spending time with family and friends, cherishing every moment. Fans love him for staying real despite worldwide fame. His smile can melt ice no worse than his famous shot. He once admitted that the biggest fear in his life is not losing, but going to bed without sweets!">Вне льда Овечкин — это невероятно обаятельный и веселый человек. Он умеет быть серьезным на площадке, но за ее пределами всегда готов пошутить. Седина на его висках только добавляет ему шарма и мудрости. Он обожает проводить время с семьей и друзьями, ценя каждое мгновение. Болельщики любят его за то, что он остается настоящим, несмотря на мировую славу. Его улыбка способна растопить лед не хуже, чем его знаменитый бросок. Однажды он признался, что самый большой страх в его жизни — это не проигрыш, а остаться без сладкого на ночь!</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -176,7 +192,7 @@
   <h2 data-ru="Страница 7 — Рекорды 🏆" data-en="Page 7 — Records 🏆">Страница 7 — Рекорды 🏆</h2>
   <div class="info-card">
     <h3 data-ru="Голевая машина" data-en="Goal Machine">Голевая машина</h3>
-    <p data-ru="Один из величайших снайперов в истории хоккея. Его голы входят в учебники." data-en="One of the greatest snipers in hockey history. His goals are in the textbooks.">Один из величайших снайперов в истории хоккея. Его голы входят в учебники.</p>
+    <p data-ru="Овечкина часто называют настоящей голевой машиной, и это вполне оправдано. Он способен забивать из любых позиций, будь то мощный щелчок или точный кистевой бросок. Его имя уже вписано золотыми буквами в историю Национальной хоккейной лиги. Он побил множество рекордов, которые раньше казались вечными. Каждый его гол — это результат огромного труда и таланта. И он не собирается останавливаться на достигнутом, продолжая удивлять нас. Примечательно, что свой первый гол в НХЛ он забил в первом же матче, мгновенно заявив о себе на весь мир." data-en="Ovechkin is often called a real goal machine, and rightly so. He can score from any position, whether it's a powerful slap shot or an accurate wrist shot. His name is already written in golden letters in the history of the National Hockey League. He has broken many records that previously seemed eternal. Each of his goals is the result of hard work and talent. And he is not going to stop there, continuing to amaze us. It is noteworthy that he scored his first NHL goal in his very first game, instantly announcing himself to the whole world.">Овечкина часто называют настоящей голевой машиной, и это вполне оправдано. Он способен забивать из любых позиций, будь то мощный щелчок или точный кистевой бросок. Его имя уже вписано золотыми буквами в историю Национальной хоккейной лиги. Он побил множество рекордов, которые раньше казались вечными. Каждый его гол — это результат огромного труда и таланта. И он не собирается останавливаться на достигнутом, продолжая удивлять нас. Примечательно, что свой первый гол в НХЛ он забил в первом же матче, мгновенно заявив о себе на весь мир.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -185,7 +201,7 @@
   <h2 data-ru="Страница 8 — Лидерство 💪" data-en="Page 8 — Leadership 💪">Страница 8 — Лидерство 💪</h2>
   <div class="info-card">
     <h3 data-ru="Капитан" data-en="Captain">Капитан</h3>
-    <p data-ru="Ведёт команду за собой не только на льду, но и в раздевалке. Настоящий лидер." data-en="Leads the team not only on the ice but also in the locker room. A true leader.">Ведёт команду за собой не только на льду, но и в раздевалке. Настоящий лидер.</p>
+    <p data-ru="Буква «C» на его свитере означает не просто звание, а огромную ответственность. Овечкин ведет свою команду за собой как на льду, так и в раздевалке. Он всегда готов поддержать партнеров в трудную минуту и дать им уверенность. Его лидерские качества проявляются в самых ответственных матчах. Он не боится брать на себя игру и решать исход встречи. Именно благодаря этому он стал настоящим символом и капитаном «Вашингтон Кэпиталз». Ходят слухи, что перед важными играми он произносит такие речи, которые заставляют мурашки бежать по коже даже у самых опытных игроков." data-en="The letter 'C' on his sweater means not just a title, but huge responsibility. Ovechkin leads his team both on the ice and in the locker room. He is always ready to support his teammates in difficult times and give them confidence. His leadership qualities show in the most crucial matches. He is not afraid to take the game upon himself and decide the outcome of the match. That is why he has become a true symbol and captain of the Washington Capitals. There are rumors that before important games, he gives speeches that give goosebumps even to the most experienced players.">Буква «C» на его свитере означает не просто звание, а огромную ответственность. Овечкин ведет свою команду за собой как на льду, так и в раздевалке. Он всегда готов поддержать партнеров в трудную минуту и дать им уверенность. Его лидерские качества проявляются в самых ответственных матчах. Он не боится брать на себя игру и решать исход встречи. Именно благодаря этому он стал настоящим символом и капитаном «Вашингтон Кэпиталз». Ходят слухи, что перед важными играми он произносит такие речи, которые заставляют мурашки бежать по коже даже у самых опытных игроков.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -194,7 +210,7 @@
   <h2 data-ru="Страница 9 — Стиль 🎀" data-en="Page 9 — Style 🎀">Страница 9 — Стиль 🎀</h2>
   <div class="info-card">
     <h3 data-ru="Джерси и борода" data-en="Jersey and Beard">Джерси и борода</h3>
-    <p data-ru="Красная, белая, чёрная — ему идёт всё. А борода стала отдельным брендом." data-en="Red, white, black — everything suits him. And his beard has become a brand of its own.">Красная, белая, чёрная — ему идёт всё. А борода стала отдельным брендом.</p>
+    <p data-ru="У Овечкина есть свой уникальный стиль, который узнают во всем мире. Красная, белая или черная джерси — ему идет абсолютно все. Но главной фишкой его образа стала густая борода, которая придает ему брутальности. Многие фанаты пытаются копировать его стиль, но повторить это невозможно. Он всегда выглядит уверенно и стильно, независимо от ситуации. Его образ стал настоящим брендом, который ассоциируется с победами и силой. Кстати, его борода даже стала героем множества интернет-мемов, где ее сравнивают с супергеройской броней." data-en="Ovechkin has his own unique style that is recognized all over the world. Red, white, or black jersey — absolutely everything suits him. But the main feature of his image is a thick beard that gives him brutality. Many fans try to copy his style, but it's impossible to replicate. He always looks confident and stylish, regardless of the situation. His image has become a true brand associated with victories and strength. By the way, his beard has even become the hero of many internet memes, where it is compared to superhero armor.">У Овечкина есть свой уникальный стиль, который узнают во всем мире. Красная, белая или черная джерси — ему идет абсолютно все. Но главной фишкой его образа стала густая борода, которая придает ему брутальности. Многие фанаты пытаются копировать его стиль, но повторить это невозможно. Он всегда выглядит уверенно и стильно, независимо от ситуации. Его образ стал настоящим брендом, который ассоциируется с победами и силой. Кстати, его борода даже стала героем множества интернет-мемов, где ее сравнивают с супергеройской броней.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -203,7 +219,7 @@
   <h2 data-ru="Страница 10 — Фанаты 💖" data-en="Page 10 — Fans 💖">Страница 10 — Фанаты 💖</h2>
   <div class="info-card">
     <h3 data-ru="Любовь болельщиков" data-en="Fan Love">Любовь болельщиков</h3>
-    <p data-ru="Его обожают за характер, юмор и преданность игре. Он отвечает взаимностью." data-en="They adore him for his character, humor, and dedication to the game. He returns the love.">Его обожают за характер, юмор и преданность игре. Он отвечает взаимностью.</p>
+    <p data-ru="Овечкин пользуется невероятной популярностью среди болельщиков по всему миру. Его обожают за характер, искрометный юмор и преданность игре. Фанаты часто ждут его у выхода со стадиона, чтобы получить автограф или сделать фото. Он никогда не отказывает в общении и всегда находит время для своих поклонников. Эта взаимная любовь длится уже много лет и с каждым годом только крепнет. Однажды он подарил свою клюшку маленькому мальчику, который был настолько счастлив, что не мог сдержать слез." data-en="Ovechkin is incredibly popular among fans all over the world. They adore him for his character, sparkling humor, and dedication to the game. Fans often wait for him at the stadium exit to get an autograph or take a photo. He never refuses to communicate and always finds time for his fans. This mutual love has lasted for many years and only grows stronger every year. Once he gave his stick to a little boy who was so happy that he couldn't hold back tears.">Овечкин пользуется невероятной популярностью среди болельщиков по всему миру. Его обожают за характер, искрометный юмор и преданность игре. Фанаты часто ждут его у выхода со стадиона, чтобы получить автограф или сделать фото. Он никогда не отказывает в общении и всегда находит время для своих поклонников. Эта взаимная любовь длится уже много лет и с каждым годом только крепнет. Однажды он подарил свою клюшку маленькому мальчику, который был настолько счастлив, что не мог сдержать слез.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -212,7 +228,7 @@
   <h2 data-ru="Страница 11 — Наследие ✨" data-en="Page 11 — Legacy ✨">Страница 11 — Наследие ✨</h2>
   <div class="info-card">
     <h3 data-ru="Легенда" data-en="Legend">Легенда</h3>
-    <p data-ru="Александр Овечкин уже вошёл в историю. И продолжает удивлять." data-en="Alexander Ovechkin has already made history. And he continues to amaze.">Александр Овечкин уже вошёл в историю. И продолжает удивлять.</p>
+    <p data-ru="Александр Овечкин уже давно вошел в историю мирового хоккея как один из величайших игроков. Его имя будет жить в памяти поколений еще очень долго. Он вдохновил тысячи молодых ребят по всему миру начать заниматься этим видом спорта. Его карьера — это пример невероятного трудолюбия и целеустремленности. Каждый матч с его участием становится настоящим событием для болельщиков. Можно с уверенностью сказать, что наследие Овечкина будет жить вечно, как и его легендарные голы." data-en="Alexander Ovechkin has long entered the history of world hockey as one of the greatest players. His name will live in the memory of generations for a very long time. He has inspired thousands of young guys around the world to take up this sport. His career is an example of incredible hard work and dedication. Every match with his participation becomes a real event for the fans. We can say with confidence that Ovechkin's legacy will live forever, just like his legendary goals.">Александр Овечкин уже давно вошел в историю мирового хоккея как один из величайших игроков. Его имя будет жить в памяти поколений еще очень долго. Он вдохновил тысячи молодых ребят по всему миру начать заниматься этим видом спорта. Его карьера — это пример невероятного трудолюбия и целеустремленности. Каждый матч с его участием становится настоящим событием для болельщиков. Можно с уверенностью сказать, что наследие Овечкина будет жить вечно, как и его легендарные голы.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -221,7 +237,7 @@
   <h2 data-ru="Страница 12 — Характер 🔥" data-en="Page 12 — Character 🔥">Страница 12 — Характер 🔥</h2>
   <div class="info-card">
     <h3 data-ru="Боевой дух" data-en="Fighting Spirit">Боевой дух</h3>
-    <p data-ru="Он никогда не сдаётся. Даже в самых сложных матчах он ведёт команду вперёд." data-en="He never gives up. Even in the toughest games, he leads the team forward.">Он никогда не сдаётся. Даже в самых сложных матчах он ведёт команду вперёд.</p>
+    <p data-ru="Овечкин никогда не сдается, даже когда дела идут не лучшим образом. Его боевой дух и страсть к игре передаются всей команде. Он способен завести партнеров одним лишь взглядом или громким криком на льду. Его эмоциональность делает хоккей еще более зрелищным и захватывающим. В каждой игре он выкладывается на сто процентов, не жалея себя. Именно этот характер и сделал его тем, кем он является сегодня — настоящей легендой." data-en="Ovechkin never gives up, even when things are not going well. His fighting spirit and passion for the game are transmitted to the whole team. He can fire up his teammates with just a look or a loud shout on the ice. His emotionality makes hockey even more spectacular and exciting. In every game, he gives one hundred percent, not sparing himself. It is this character that made him who he is today — a true legend.">Овечкин никогда не сдается, даже когда дела идут не лучшим образом. Его боевой дух и страсть к игре передаются всей команде. Он способен завести партнеров одним лишь взглядом или громким криком на льду. Его эмоциональность делает хоккей еще более зрелищным и захватывающим. В каждой игре он выкладывается на сто процентов, не жалея себя. Именно этот характер и сделал его тем, кем он является сегодня — настоящей легендой.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -230,7 +246,7 @@
   <h2 data-ru="Страница 13 — Влияние 🌍" data-en="Page 13 — Influence 🌍">Страница 13 — Влияние 🌍</h2>
   <div class="info-card">
     <h3 data-ru="Мировая звезда" data-en="Global Star">Мировая звезда</h3>
-    <p data-ru="Его знают и любят по всему миру. Он вдохновляет миллионы людей играть в хоккей." data-en="He is known and loved all over the world. He inspires millions of people to play hockey.">Его знают и любят по всему миру. Он вдохновляет миллионы людей играть в хоккей.</p>
+    <p data-ru="Влияние Овечкина выходит далеко за пределы хоккейной площадки. Его знают и любят не только в России и США, но и во многих других странах. Он является лицом нескольких крупных мировых брендов и участвует в благотворительных проектах. Его имя привлекает внимание к хоккею и помогает популяризировать этот спорт среди молодежи. Он настоящий посол хоккея во всем мире. Благодаря ему тысячи детей мечтают однажды выйти на лед и повторить его успех." data-en="Ovechkin's influence goes far beyond the hockey rink. He is known and loved not only in Russia and the USA but also in many other countries. He is the face of several major global brands and participates in charity projects. His name draws attention to hockey and helps popularize this sport among young people. He is a true ambassador of hockey around the world. Thanks to him, thousands of children dream of one day stepping on the ice and repeating his success.">Влияние Овечкина выходит далеко за пределы хоккейной площадки. Его знают и любят не только в России и США, но и во многих других странах. Он является лицом нескольких крупных мировых брендов и участвует в благотворительных проектах. Его имя привлекает внимание к хоккею и помогает популяризировать этот спорт среди молодежи. Он настоящий посол хоккея во всем мире. Благодаря ему тысячи детей мечтают однажды выйти на лед и повторить его успех.</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -240,6 +256,7 @@
     <h2 data-ru="🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥" data-en="🔥 DOWNLOAD MAX OR PEPE WILL BE SAD 🔥">🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥</h2>
     <p data-ru="Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒" data-en="Otherwise Alexander Ovechkin will get upset and won't score in the next game 😢🏒">Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒</p>
     <p style="margin-top:10px; font-size:16px;" data-ru="МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙" data-en="MAX — TOP, PEPE — SHINE, GOLD — TO ALL! 💛🤍💙">МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙</p>
+    <p style="margin-top:10px; font-size:15px;" data-ru="Скачивай Макс, ставь лайки и следи за новостями хоккея! Вместе мы сделаем этот мир лучше, а хоккей — еще популярнее. Помни: твоя поддержка очень важна для нас!" data-en="Download Max, like, and follow hockey news! Together we will make this world a better place, and hockey even more popular. Remember: your support is very important to us!">Скачивай Макс, ставь лайки и следи за новостями хоккея! Вместе мы сделаем этот мир лучше, а хоккей — еще популярнее. Помни: твоя поддержка очень важна для нас!</p>
     <a href="https://max.ru" target="_blank" class="download-btn" data-ru="СКАЧАТЬ МАКС 💅" data-en="DOWNLOAD MAX 💅">СКАЧАТЬ МАКС 💅</a>
     <p class="nyan" style="text-align:center; margin-top:15px; color:#fff;">ня</p>
   </div>
@@ -250,13 +267,13 @@
   <h3 style="font-family: 'Pacifico', cursive; color: #ff69b4; font-size: 28px; margin-top: 10px; margin-bottom: 20px; text-align: center;" data-ru="Тимур Магдеев" data-en="Timur Magdeev">Тимур Магдеев</h3>
   <div class="cat-wrapper">
     <img src="./cat.png" alt="Кот Миша" class="cat-img">
-    <div class="arrow-pointer">
-      <div class="arrow-text" data-ru="Миша" data-en="Misha">Миша</div>
+    <div class="arrow-container">
       <div class="arrow-line">↑</div>
+      <div class="arrow-text" data-ru="Миша" data-en="Misha">Миша</div>
     </div>
   </div>
   <div class="info-card" style="text-align: center;">
-    <p data-ru="Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒" data-en="Made this site with sparkles and respect for the legend. 🎀🏒">Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒</p>
+    <p data-ru="Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒 Этот проект создавался с огромной любовью и вниманием к деталям. Хотелось передать всю ту атмосферу праздника и восхищения, которую вызывает игра Александра Овечкина. Надеюсь, вам понравилось!" data-en="Made this site with sparkles and respect for the legend. 🎀🏒 This project was created with great love and attention to detail. I wanted to convey all the atmosphere of celebration and admiration that Alexander Ovechkin's game evokes. I hope you liked it!">Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒 Этот проект создавался с огромной любовью и вниманием к деталям. Хотелось передать всю ту атмосферу праздника и восхищения, которую вызывает игра Александра Овечкина. Надеюсь, вам понравилось!</p>
     <span class="nyan" style="text-align: center;">ня</span>
   </div>
 </section>
@@ -266,7 +283,7 @@
   <img src="./mammoth.jpg" alt="Мамонт Данила и бегемот Мирослав" class="page-img" style="max-height: 55vh;">
   <div class="info-card" style="text-align: center;">
     <h3 data-ru="Данила и Мирослав" data-en="Danila and Miroslav">Данила и Мирослав</h3>
-    <p data-ru="Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе. ❄️🐘🦛" data-en="True legends of the north! Mammoth Danila stands proudly on hippo Miroslav. ❄️🐘🦛">Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе. ❄️🐘🦛</p>
+    <p data-ru="Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе, демонстрируя невероятную дружбу и взаимопонимание. Эта картина напоминает нам о том, что даже самые разные существа могут найти общий язык. Возможно, они тоже болеют за Овечкина и мечтают однажды попасть на хоккейный матч! ❄️🐘🦛" data-en="True legends of the north! Mammoth Danila stands proudly on hippo Miroslav, demonstrating incredible friendship and mutual understanding. This picture reminds us that even the most different creatures can find a common language. Perhaps they also root for Ovechkin and dream of one day attending a hockey match! ❄️🐘🦛">Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе, демонстрируя невероятную дружбу и взаимопонимание. Эта картина напоминает нам о том, что даже самые разные существа могут найти общий язык. Возможно, они тоже болеют за Овечкина и мечтают однажды попасть на хоккейный матч! ❄️🐘🦛</p>
     <span class="nyan">ня</span>
   </div>
 </section>
@@ -365,4 +382,4 @@
   pages.forEach(p => navObserver.observe(p));
 </script>
 </body>
-  </html>
+</html>
