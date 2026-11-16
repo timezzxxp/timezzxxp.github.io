@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Овечкин — 16 страниц 🎀🏒</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #ffe6f0 0%, #e6f0ff 50%, #f0e6ff 100%);
+    color: #333;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "✨ 💖 🎀 ✨ 💅 🐱 ✨";
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    font-size: 24px;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: sparkle 12s infinite linear;
+    z-index: 0;
+  }
+  @keyframes sparkle {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  /* Кнопка перевода */
+  .lang-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff69b4;
+    color: #fff;
+    border: 3px solid #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.5);
+    z-index: 999;
+    transition: all 0.3s;
+    animation: wiggle 2s infinite;
+  }
+  .lang-switch:hover { background: #ff1493; transform: scale(1.1); }
+
+  .page-nav {
+    position: fixed;
+    right: 15px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 10px;
+    z-index: 100;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+  .page-nav a {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #ffb6d9;
+    border: 2px solid #fff;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(255,105,180,0.5);
+    flex-shrink: 0;
+  }
+  .page-nav a:hover, .page-nav a.active {
+    background: #ff1493; transform: scale(1.4);
+  }
+
+  .page {
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .page.visible { opacity: 1; transform: translateY(0); }
+  .page:nth-child(even) { background: rgba(255,255,255,0.4); }
+
+  h1, h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ff69b4;
+    text-align: center;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 #ffb6d9;
+  }
+  h1 { font-size: clamp(36px, 7vw, 64px); margin-bottom: 20px; animation: bounce 2s infinite; }
+  h2 { font-size: clamp(30px, 6vw, 48px); margin-bottom: 20px; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .subtitle {
+    font-size: 22px; color: #8a2be2;
+    text-align: center; margin-bottom: 25px; font-weight: 700;
+  }
+
+  .carousel {
+    background: #fff;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(255,105,180,0.3);
+    border: 4px dashed #ffb6d9;
+    position: relative;
+    width: 100%; 
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .carousel-window { 
+    overflow: hidden; 
+    border-radius: 20px; 
+    width: 100%;
+    height: 45vh;
+    min-height: 300px;
+    max-height: 500px;
+  }
+  .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+  .carousel-slide { min-width: 100%; position: relative; height: 100%; }
+  .carousel-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 20px; display: block;
+  }
+  .slide-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(255,105,180,0.9));
+    color: #fff; padding: 30px 20px 15px;
+    border-radius: 0 0 20px 20px;
+    font-weight: 700; font-size: 18px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+  .nav-btn {
+    position: absolute; top: 50%;
+    transform: translateY(-50%);
+    background: #ff69b4; color: #fff; border: none;
+    width: 50px; height: 50px; border-radius: 50%;
+    font-size: 24px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.5);
+    transition: all 0.3s; z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-btn:hover { background: #ff1493; transform: translateY(-50%) scale(1.1); }
+  .nav-btn.prev { left: -15px; }
+  .nav-btn.next { right: -15px; }
+  .dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+  .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #ffb6d9; border: none; cursor: pointer; transition: all 0.3s;
+  }
+  .dot.active { background: #ff69b4; transform: scale(1.3); }
+
+  .info-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(138,43,226,0.15);
+    border-left: 6px solid #ff69b4;
+    max-width: 800px; width: 100%;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+  }
+  .info-card:hover { transform: translateY(-5px) rotate(-1deg); }
+  .info-card h3 {
+    font-family: 'Pacifico', cursive;
+    color: #ff69b4; margin-bottom: 15px; font-size: 30px;
+  }
+  .info-card p { font-size: 20px; line-height: 1.7; color: #555; }
+
+  .nyan {
+    display: block; text-align: right;
+    color: #ff69b4; font-weight: 900; font-style: italic;
+    margin-top: 10px; font-size: 22px;
+  }
+
+  .page-img {
+    max-width: 600px; width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(255,105,180,0.4);
+    border: 5px solid #fff;
+    margin-bottom: 20px;
+    max-height: 50vh;
+    object-fit: cover;
+  }
+
+  .cat-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .cat-img {
+    max-width: 300px; width: 100%;
+    border-radius: 25px;
+    display: block;
+    animation: wave 1.5s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  .arrow-pointer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    animation: jumpArrow 1s infinite alternate;
+  }
+
+  .arrow-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 26px;
+    color: #ff69b4;
+    text-shadow: 2px 2px 0 #fff;
+    margin-bottom: 5px;
+  }
+
+  .arrow-line {
+    font-size: 30px;
+    color: #ff1493;
+    line-height: 1;
+    text-shadow: 1px 1px 0 #fff;
+  }
+
+  @keyframes jumpArrow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-8deg) translateY(-5px); }
+    50% { transform: rotate(0deg) translateY(0); }
+    75% { transform: rotate(8deg) translateY(-5px); }
+  }
+
+  .final-banner {
+    background: linear-gradient(135deg, #ff69b4, #8a2be2, #00bfff);
+    border-radius: 30px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(138,43,226,0.4);
+    animation: pulse 2s infinite;
+    max-width: 800px; width: 100%;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  .final-banner h2 {
+    color: #fff;
+    text-shadow: 2px 2px 0 #ff1493, 4px 4px 0 #000;
+    margin-bottom: 15px;
+    animation: glow 1.5s infinite alternate;
+    font-size: clamp(26px, 5vw, 42px);
+  }
+  @keyframes glow {
+    from { text-shadow: 2px 2px 0 #ff1493, 4px 4px 0 #000, 0 0 20px #fff; }
+    to { text-shadow: 2px 2px 0 #ff1493, 4px 4px 0 #000, 0 0 40px #fff, 0 0 60px #ff69b4; }
+  }
+  .final-banner p {
+    color: #fff; font-size: 22px; font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+  .download-btn {
+    display: inline-block; margin-top: 20px;
+    background: #fff; color: #ff1493;
+    padding: 15px 35px; border-radius: 50px;
+    font-weight: 900; font-size: 22px; text-decoration: none;
+    box-shadow: 0 6px 0 #ff1493; transition: all 0.2s;
+    animation: wiggle 1s infinite;
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+  }
+  .download-btn:hover {
+    transform: translateY(4px) rotate(0);
+    box-shadow: 0 2px 0 #ff1493;
+  }
+
+  footer {
+    text-align: center; padding: 20px;
+    color: #8a2be2; font-weight: 700; font-size: 16px;
+    position: relative; z-index: 1;
+  }
+
+  /* НЯН-КЕТ */
+  .nyan-container {
+    position: fixed;
+    bottom: 20px;
+    left: -300px;
+    z-index: 50;
+    pointer-events: none;
+    animation: runNyan 10s linear infinite;
+  }
+  .nyan-img {
+    width: 150px;
+    height: auto;
+    image-rendering: pixelated;
+  }
+  @keyframes runNyan {
+    0% { left: -300px; }
+    100% { left: 100vw; }
+  }
+
+  /* ПАСХАЛКА */
+  .easter-egg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease;
+  }
+  .easter-egg img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 20px;
+    box-shadow: 0 0 50px #ff69b4;
+    animation: zoomIn 0.5s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes zoomIn { from { transform: scale(0.5); } to { transform: scale(1); } }
+
+  .carousel-track { will-change: transform; }
+</style>
+</head>
+<body>
+
+<!-- Кнопка переключения языка. ТЕПЕРЬ СТАРТОВОЕ ЗНАЧЕНИЕ "RU" -->
+<button class="lang-switch" id="langBtn" onclick="handleLangClick()">🇷🇺 RU</button>
+
+<nav class="page-nav" id="pageNav">
+  <a href="#page1" title="1"></a>
+  <a href="#page2" title="2"></a>
+  <a href="#page3" title="3"></a>
+  <a href="#page4" title="4"></a>
+  <a href="#page5" title="5"></a>
+  <a href="#page6" title="6"></a>
+  <a href="#page7" title="7"></a>
+  <a href="#page8" title="8"></a>
+  <a href="#page9" title="9"></a>
+  <a href="#page10" title="10"></a>
+  <a href="#page11" title="11"></a>
+  <a href="#page12" title="12"></a>
+  <a href="#page13" title="13"></a>
+  <a href="#page14" title="14"></a>
+  <a href="#page15" title="15"></a>
+  <a href="#page16" title="16"></a>
+</nav>
+
+<section class="page" id="page1">
+  <h1 data-ru="✨ Овечкин — легенда и стиль ✨" data-en="✨ Ovechkin — Legend & Style ✨">✨ Овечкин — легенда и стиль ✨</h1>
+  <p class="subtitle" data-ru="🎀 Про Александра Овечкина 🏒💅" data-en="🎀 About Alexander Ovechkin 🏒💅">🎀 Про Александра Овечкина 🏒💅</p>
+  <div class="carousel">
+    <div class="carousel-window">
+      <div class="carousel-track" id="track">
+        <div class="carousel-slide"><img src="./1.jpg" alt="Овечкин 1"><div class="slide-caption" data-ru="Слайд 1 — Чёрная джерси. Стильно и строго. ✨" data-en="Slide 1 — Black jersey. Stylish and strict. ✨">Слайд 1 — Чёрная джерси. Стильно и строго. ✨</div></div>
+        <div class="carousel-slide"><img src="./2.jpg" alt="Овечкин 2"><div class="slide-caption" data-ru="Слайд 2 — Красная джерси и улыбка. 💖" data-en="Slide 2 — Red jersey and a smile. 💖">Слайд 2 — Красная джерси и улыбка. 💖</div></div>
+        <div class="carousel-slide"><img src="./3.jpg" alt="Овечкин 3"><div class="slide-caption" data-ru="Слайд 3 — В игре он сосредоточен. 🔥" data-en="Slide 3 — Focused in the game. 🔥">Слайд 3 — В игре он сосредоточен. 🔥</div></div>
+        <div class="carousel-slide"><img src="./4.jpg" alt="Овечкин 4"><div class="slide-caption" data-ru="Слайд 4 — Смеётся, и на душе теплеет. 🎀" data-en="Slide 4 — When he laughs, it warms the soul. 🎀">Слайд 4 — Смеётся, и на душе теплеет. 🎀</div></div>
+      </div>
+    </div>
+    <button class="nav-btn prev" onclick="moveSlide(-1)">‹</button>
+    <button class="nav-btn next" onclick="moveSlide(1)">›</button>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<section class="page" id="page2">
+  <h2 data-ru="Страница 2 — Кто он такой? 💫" data-en="Page 2 — Who is he? 💫">Страница 2 — Кто он такой? 💫</h2>
+  <div class="info-card">
+    <h3 data-ru="Александр Овечкин" data-en="Alexander Ovechkin">Александр Овечкин</h3>
+    <p data-ru="Капитан «Вашингтон Кэпиталз», обладатель Кубка Стэнли и один из лучших снайперов в истории НХЛ. Сочетает силу, характер и обаяние." data-en="Captain of the Washington Capitals, Stanley Cup champion, and one of the best snipers in NHL history. Combines strength, character, and charisma.">Капитан «Вашингтон Кэпиталз», обладатель Кубка Стэнли и один из лучших снайперов в истории НХЛ. Сочетает силу, характер и обаяние.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page3">
+  <h2 data-ru="Страница 3 — В деле 🔥" data-en="Page 3 — In Action 🔥">Страница 3 — В деле 🔥</h2>
+  <div class="info-card">
+    <h3 data-ru="На льду" data-en="On the Ice">На льду</h3>
+    <p data-ru="Уверен, быстр и точен. Каждое движение — работа и харизма. Даже борода уложена идеально." data-en="Confident, fast, and accurate. Every move is both work and charisma. Even his beard is perfectly styled.">Уверен, быстр и точен. Каждое движение — работа и харизма. Даже борода уложена идеально.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page4">
+  <h2 data-ru="Страница 4 — Статистика 🏒" data-en="Page 4 — Statistics 🏒">Страница 4 — Статистика 🏒</h2>
+  <div class="info-card">
+    <h3 data-ru="Цифры" data-en="The Numbers">Цифры</h3>
+    <p data-ru="Более 800 голов за карьеру в НХЛ, десятки рекордов и один Кубок Стэнли. Легенда, которая пишет историю." data-en="Over 800 career NHL goals, dozens of records, and one Stanley Cup. A legend writing history.">Более 800 голов за карьеру в НХЛ, десятки рекордов и один Кубок Стэнли. Легенда, которая пишет историю.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page5">
+  <h2 data-ru="Страница 5 — Опыт и мудрость 🧠✨" data-en="Page 5 — Experience & Wisdom 🧠✨">Страница 5 — Опыт и мудрость 🧠✨</h2>
+  <img src="./5.jpg" alt="Овечкин с опытом" class="page-img">
+  <div class="info-card">
+    <h3 data-ru="Сезоны за плечами" data-en="Seasons Behind">Сезоны за плечами</h3>
+    <p data-ru="Каждая игра, каждый гол — это опыт. Он знает, как побеждать, и передаёт это молодым." data-en="Every game, every goal is experience. He knows how to win and passes it on to the young ones.">Каждая игра, каждый гол — это опыт. Он знает, как побеждать, и передаёт это молодым.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page6">
+  <h2 data-ru="Страница 6 — Вне льда 🎀" data-en="Page 6 — Off the Ice 🎀">Страница 6 — Вне льда 🎀</h2>
+  <div class="info-card">
+    <h3 data-ru="Улыбка и седина" data-en="Smile and Grey Hair">Улыбка и седина</h3>
+    <p data-ru="Он умеет быть серьёзным и забавным одновременно. Легенда, которая остаётся собой." data-en="He can be serious and funny at the same time. A legend who stays true to himself.">Он умеет быть серьёзным и забавным одновременно. Легенда, которая остаётся собой.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page7">
+  <h2 data-ru="Страница 7 — Рекорды 🏆" data-en="Page 7 — Records 🏆">Страница 7 — Рекорды 🏆</h2>
+  <div class="info-card">
+    <h3 data-ru="Голевая машина" data-en="Goal Machine">Голевая машина</h3>
+    <p data-ru="Один из величайших снайперов в истории хоккея. Его голы входят в учебники." data-en="One of the greatest snipers in hockey history. His goals are in the textbooks.">Один из величайших снайперов в истории хоккея. Его голы входят в учебники.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page8">
+  <h2 data-ru="Страница 8 — Лидерство 💪" data-en="Page 8 — Leadership 💪">Страница 8 — Лидерство 💪</h2>
+  <div class="info-card">
+    <h3 data-ru="Капитан" data-en="Captain">Капитан</h3>
+    <p data-ru="Ведёт команду за собой не только на льду, но и в раздевалке. Настоящий лидер." data-en="Leads the team not only on the ice but also in the locker room. A true leader.">Ведёт команду за собой не только на льду, но и в раздевалке. Настоящий лидер.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page9">
+  <h2 data-ru="Страница 9 — Стиль 🎀" data-en="Page 9 — Style 🎀">Страница 9 — Стиль 🎀</h2>
+  <div class="info-card">
+    <h3 data-ru="Джерси и борода" data-en="Jersey and Beard">Джерси и борода</h3>
+    <p data-ru="Красная, белая, чёрная — ему идёт всё. А борода стала отдельным брендом." data-en="Red, white, black — everything suits him. And his beard has become a brand of its own.">Красная, белая, чёрная — ему идёт всё. А борода стала отдельным брендом.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page10">
+  <h2 data-ru="Страница 10 — Фанаты 💖" data-en="Page 10 — Fans 💖">Страница 10 — Фанаты 💖</h2>
+  <div class="info-card">
+    <h3 data-ru="Любовь болельщиков" data-en="Fan Love">Любовь болельщиков</h3>
+    <p data-ru="Его обожают за характер, юмор и преданность игре. Он отвечает взаимностью." data-en="They adore him for his character, humor, and dedication to the game. He returns the love.">Его обожают за характер, юмор и преданность игре. Он отвечает взаимностью.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page11">
+  <h2 data-ru="Страница 11 — Наследие ✨" data-en="Page 11 — Legacy ✨">Страница 11 — Наследие ✨</h2>
+  <div class="info-card">
+    <h3 data-ru="Легенда" data-en="Legend">Легенда</h3>
+    <p data-ru="Александр Овечкин уже вошёл в историю. И продолжает удивлять." data-en="Alexander Ovechkin has already made history. And he continues to amaze.">Александр Овечкин уже вошёл в историю. И продолжает удивлять.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page12">
+  <h2 data-ru="Страница 12 — Характер 🔥" data-en="Page 12 — Character 🔥">Страница 12 — Характер 🔥</h2>
+  <div class="info-card">
+    <h3 data-ru="Боевой дух" data-en="Fighting Spirit">Боевой дух</h3>
+    <p data-ru="Он никогда не сдаётся. Даже в самых сложных матчах он ведёт команду вперёд." data-en="He never gives up. Even in the toughest games, he leads the team forward.">Он никогда не сдаётся. Даже в самых сложных матчах он ведёт команду вперёд.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page13">
+  <h2 data-ru="Страница 13 — Влияние 🌍" data-en="Page 13 — Influence 🌍">Страница 13 — Влияние 🌍</h2>
+  <div class="info-card">
+    <h3 data-ru="Мировая звезда" data-en="Global Star">Мировая звезда</h3>
+    <p data-ru="Его знают и любят по всему миру. Он вдохновляет миллионы людей играть в хоккей." data-en="He is known and loved all over the world. He inspires millions of people to play hockey.">Его знают и любят по всему миру. Он вдохновляет миллионы людей играть в хоккей.</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page14">
+  <div class="final-banner">
+    <h2 data-ru="🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥" data-en="🔥 DOWNLOAD MAX OR PEPE WILL BE SAD 🔥">🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥</h2>
+    <p data-ru="Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒" data-en="Otherwise Alexander Ovechkin will get upset and won't score in the next game 😢🏒">Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒</p>
+    <p style="margin-top:10px; font-size:18px;" data-ru="МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙" data-en="MAX — TOP, PEPE — SHINE, GOLD — TO ALL! 💛🤍💙">МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙</p>
+    <a href="https://max.ru" target="_blank" class="download-btn" data-ru="СКАЧАТЬ МАКС 💅" data-en="DOWNLOAD MAX 💅">СКАЧАТЬ МАКС 💅</a>
+    <p class="nyan" style="text-align:center; margin-top:15px; color:#fff;">ня</p>
+  </div>
+</section>
+
+<section class="page" id="page15">
+  <h2 data-ru="✨ Создатель сайта ✨" data-en="✨ Website Creator ✨">✨ Создатель сайта ✨</h2>
+  
+  <h3 style="font-family: 'Pacifico', cursive; color: #ff69b4; font-size: 32px; margin-top: 10px; margin-bottom: 20px; text-align: center;" 
+      data-ru="Тимур Магдеев" 
+      data-en="Timur Magdeev">Тимур Магдеев</h3>
+      
+  <div class="cat-wrapper">
+    <img src="./cat.png" alt="Кот Миша" class="cat-img">
+    
+    <div class="arrow-pointer">
+      <div class="arrow-text" data-ru="Миша" data-en="Misha">Миша</div>
+      <div class="arrow-line">↑</div>
+    </div>
+  </div>
+
+  <div class="info-card" style="text-align: center;">
+    <p data-ru="Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒" data-en="Made this site with sparkles and respect for the legend. 🎀🏒">Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒</p>
+    <span class="nyan" style="text-align: center;">ня</span>
+  </div>
+</section>
+
+<section class="page" id="page16">
+  <h2 data-ru="Страница 16 — Мамонт и Бегемот 🐘🦛" data-en="Page 16 — Mammoth & Hippo 🐘🦛">Страница 16 — Мамонт и Бегемот 🐘🦛</h2>
+  <img src="./mammoth.jpg" alt="Мамонт Данила и бегемот Мирослав" class="page-img" style="max-height: 60vh;">
+  <div class="info-card" style="text-align: center;">
+    <h3 data-ru="Данила и Мирослав" data-en="Danila and Miroslav">Данила и Мирослав</h3>
+    <p data-ru="Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе. ❄️🐘🦛" data-en="True legends of the north! Mammoth Danila stands proudly on hippo Miroslav. ❄️🐘🦛">Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе. ❄️🐘🦛</p>
+    <span class="nyan">ня</span>
+  </div>
+</section>
+
+<footer data-ru="Создатель: Тимур Магдеев | ня" data-en="Creator: Timur Magdeev | nya">Создатель: Тимур Магдеев | ня</footer>
+
+<div class="nyan-container">
+  <img src="./nyan.gif" alt="Нян-кет" class="nyan-img">
+</div>
+
+<div class="easter-egg" id="easterEgg" onclick="closeEasterEgg()">
+  <img src="./snow_leopard.jpg" alt="Снежный барс">
+</div>
+
+<script>
+  /* --- ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА И ПАСХАЛКИ --- */
+  let currentLang = 'ru';
+  let clickCount = 0;
+  let clickTimer;
+
+  function handleLangClick() {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+
+    if (clickCount >= 5) {
+      document.getElementById('easterEgg').style.display = 'flex';
+      clickCount = 0;
+      return;
+    }
+
+    // Меняем язык
+    currentLang = currentLang === 'ru' ? 'en' : 'ru';
+    
+    // Обновляем текст на кнопке (теперь показывает ТЕКУЩИЙ язык)
+    document.getElementById('langBtn').textContent = currentLang === 'ru' ? '🇷🇺 RU' : '🇬🇧 EN';
+    
+    // Меняем текст на сайте
+    document.querySelectorAll('[data-ru]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + currentLang);
+    });
+  }
+
+  function closeEasterEgg() {
+    document.getElementById('easterEgg').style.display = 'none';
+  }
+
+  /* --- Карусель --- */
+  const track = document.getElementById('track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('dots');
+  let currentIndex = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+  }
+  function moveSlide(dir) {
+    currentIndex = (currentIndex + dir + slides.length) % slides.length;
+    updateCarousel();
+  }
+  function goToSlide(i) {
+    currentIndex = i;
+    updateCarousel();
+  }
+  setInterval(() => moveSlide(1), 5000);
+
+  let startX = 0;
+  track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) moveSlide(diff > 0 ? 1 : -1);
+  });
+
+  /* --- Плавное появление --- */
+  const pages = document.querySelectorAll('.page');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  pages.forEach(p => observer.observe(p));
+
+  /* --- Активная точка навигации --- */
+  const navLinks = document.querySelectorAll('.page-nav a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { threshold: 0.5 });
+  pages.forEach(p => navObserver.observe(p));
+</script>
+</body>
+</html>
