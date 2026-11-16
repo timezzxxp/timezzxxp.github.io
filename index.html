@@ -33,32 +33,32 @@
             color: #ff69b4;
             font-family: 'Pacifico', cursive;
             font-weight: normal;
-            margin-bottom: 8px;
-            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
         }
 
-        p { font-size: 0.95rem; line-height: 1.4; margin-bottom: 8px; }
+        p { font-size: 1rem; line-height: 1.5; margin-bottom: 10px; }
 
+        /* Контейнер для SVG картинки */
         .img-container {
             width: 100%;
-            height: 180px;
-            overflow: hidden;
+            height: 200px;
             border-radius: 15px;
-            margin-bottom: 10px;
-            border: 2px solid #ffb6c1;
-            background-color: #ffe6f0; /* Розовый фон на случай, если картинка не загрузится */
-            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 15px;
+            border: 3px solid #ffb6c1;
+            overflow: hidden;
+            background-color: #ffe6f0;
         }
 
-        .img-container img {
+        .img-container svg {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            display: block;
         }
 
         .femboy-msg {
-            margin-top: 8px;
-            padding: 8px 15px;
+            margin-top: 10px;
+            padding: 10px 15px;
             background: #fff0f5;
             border-left: 4px solid #ff69b4;
             border-radius: 12px;
@@ -66,10 +66,10 @@
             font-style: italic;
             font-weight: 700;
             box-shadow: 0 2px 8px rgba(255,105,180,0.15);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
 
         button {
             padding: 8px 20px; border: none; cursor: pointer;
@@ -89,7 +89,11 @@
         <div class="slide active">
             <h1>Средневековая Япония</h1>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Great_Wave_off_Kanagawa2.jpg/800px-Great_Wave_off_Kanagawa2.jpg" alt="Япония">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <circle cx="50" cy="50" r="30" fill="#ffb6c1" />
+                    <path d="M30 70 Q50 40 70 70" stroke="#fff" stroke-width="5" fill="none"/>
+                </svg>
             </div>
             <p>Сёгунат, монголы и искусство войны</p>
             <p class="femboy-msg">Ня~ давай узнаем, как самураи защищали свою землю! ✨🎀</p>
@@ -99,9 +103,13 @@
         <div class="slide">
             <h2>1. Особенности расположения Японии</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Map_of_Japan_and_Korea_%28orthographic_projection%29.svg/800px-Map_of_Japan_and_Korea_%28orthographic_projection%29.svg.png" alt="Карта">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e6f7ff" />
+                    <circle cx="50" cy="50" r="25" fill="#bde0fe" />
+                    <path d="M10 80 Q30 60 50 80 T90 80" stroke="#fff" stroke-width="4" fill="none"/>
+                </svg>
             </div>
-            <p>Япония — островное государство. Островное положение давало защиту от внешних вторжений, но создавало зависимость от моря и ограниченность земельных ресурсов.</p>
+            <p>Япония — островное государство. Островное положение давало защиту от внешних вторжений, но создавало зависимость от моря.</p>
             <p class="femboy-msg">Остров — это как естественная крепость, ня~ 🏝️🛡️</p>
         </div>
 
@@ -109,9 +117,13 @@
         <div class="slide">
             <h2>2. Природа и жители в XIII в.</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/FujiSan_SunRise.jpg/800px-FujiSan_SunRise.jpg" alt="Природа">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e0fbfc" />
+                    <path d="M20 80 L50 20 L80 80 Z" fill="#98c1d9" />
+                    <circle cx="50" cy="20" r="5" fill="#fff" />
+                </svg>
             </div>
-            <p>Частые тайфуны (камикадзе), землетрясения и цунами формировали суровый характер жителей, приучая их к стойкости и дисциплине.</p>
+            <p>Частые тайфуны (камикадзе), землетрясения и цунами формировали суровый характер жителей.</p>
             <p class="femboy-msg">Жить среди тайфунов — это надо иметь стальные нервы~ 😳🌊</p>
         </div>
 
@@ -119,7 +131,11 @@
         <div class="slide">
             <h2>3. Монгольская угроза</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mongol_invasion_of_Japan_1274.jpg/800px-Mongol_invasion_of_Japan_1274.jpg" alt="Воины">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe0e9" />
+                    <polygon points="30,80 50,20 70,80" fill="#ff85a1" />
+                    <circle cx="50" cy="50" r="10" fill="#fff" />
+                </svg>
             </div>
             <p>В конце XIII века сёгунат столкнулся с монгольскими завоевателями. Хубилай-хан дважды пытался вторгнуться на острова.</p>
             <p class="femboy-msg">Монголы были страшными врагами, но Япония выстояла~ ⚔️🇯🇵</p>
@@ -129,7 +145,10 @@
         <div class="slide">
             <h2>4. «Камикадзе» (Божественный ветер)</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Great_Wave_off_Kanagawa2.jpg/800px-Great_Wave_off_Kanagawa2.jpg" alt="Шторм">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e6f7ff" />
+                    <path d="M10 50 Q30 20 50 50 T90 50" stroke="#8ecae6" stroke-width="8" fill="none"/>
+                </svg>
             </div>
             <p>Монгольские флоты были уничтожены тайфунами. Японцы назвали эти спасительные штормы «камикадзе» — «божественный ветер».</p>
             <p class="femboy-msg">Сама природа встала на их защиту! Невероятно, ня~ 🌪️✨</p>
@@ -139,7 +158,11 @@
         <div class="slide">
             <h2>5. Вопрос из учебника №1</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Map_of_Japan_and_Korea_%28orthographic_projection%29.svg/800px-Map_of_Japan_and_Korea_%28orthographic_projection%29.svg.png" alt="Вопрос">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#fff0f5" />
+                    <circle cx="50" cy="50" r="20" fill="#ffb6c1" />
+                    <text x="50" y="55" font-size="20" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="bold">?</text>
+                </svg>
             </div>
             <p><b>Каковы особенности расположения Японии?</b></p>
             <p>Ответ: Островное государство, защищённое морем, с ограниченными земельными ресурсами.</p>
@@ -150,7 +173,11 @@
         <div class="slide">
             <h2>6. Вопрос из учебника №2</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Samurai_armor_%28Warlord%29.jpg/800px-Samurai_armor_%28Warlord%29.jpg" alt="Самурай">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <rect x="30" y="30" width="40" height="40" rx="10" fill="#ffb6c1" />
+                    <text x="50" y="55" font-size="20" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="bold">!</text>
+                </svg>
             </div>
             <p><b>С какими врагами пришлось столкнуться японцам в XIII в.? Каковы результаты?</b></p>
             <p>Ответ: С монголами. Монгольские флоты были уничтожены «божественным ветром» (камикадзе), Япония сохранила независимость.</p>
@@ -161,7 +188,12 @@
         <div class="slide">
             <h2>7. Рост городов и торговли</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Historical_map_of_Kyoto.jpg/800px-Historical_map_of_Kyoto.jpg" alt="Город">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e6f7ff" />
+                    <rect x="20" y="60" width="20" height="30" fill="#a2d2ff" />
+                    <rect x="50" y="40" width="20" height="50" fill="#bde0fe" />
+                    <rect x="80" y="50" width="10" height="40" fill="#cdb4db" />
+                </svg>
             </div>
             <p>В XIII–XIV вв. наблюдается рост городов и расцвет ремесла. Усилилась позиция знати.</p>
             <p class="femboy-msg">Города растут, торговля кипит — жизнь бьёт ключом, ня~ 🏙️💰</p>
@@ -171,7 +203,11 @@
         <div class="slide">
             <h2>8. Междоусобные войны</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Samurai_warriors.jpg/800px-Samurai_warriors.jpg" alt="Война">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <line x1="30" y1="30" x2="70" y2="70" stroke="#ff85a1" stroke-width="6" />
+                    <line x1="70" y1="30" x2="30" y2="70" stroke="#ff85a1" stroke-width="6" />
+                </svg>
             </div>
             <p>Новый этап междоусобной борьбы завершился фактическим разделением Японии на несколько частей.</p>
             <p class="femboy-msg">Делить страну — это так грустно, ня~ 😭🗡️</p>
@@ -181,7 +217,10 @@
         <div class="slide">
             <h2>9. Новый сёгун — Асикага Такаудзи</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ashikaga_Takauji.jpg/800px-Ashikaga_Takauji.jpg" alt="Сёгун">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#fff0f5" />
+                    <polygon points="50,20 60,40 80,40 65,55 70,75 50,65 30,75 35,55 20,40 40,40" fill="#ffb6c1" />
+                </svg>
             </div>
             <p>В 1338 г. Асикага Такаудзи объединил страну и стал новым сёгуном. Его потомки управляли Японией до конца XVI в.</p>
             <p class="femboy-msg">Нашёлся тот, кто навёл порядок! Уважение, ня~ 👑✨</p>
@@ -191,7 +230,10 @@
         <div class="slide">
             <h2>10. Итоги периода</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/FujiSan_SunRise.jpg/800px-FujiSan_SunRise.jpg" alt="Токио">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e0fbfc" />
+                    <path d="M10 80 Q50 20 90 80" stroke="#98c1d9" stroke-width="6" fill="none"/>
+                </svg>
             </div>
             <p>Сёгунат Асикага правил долго, но Япония продолжала развиваться, преодолевая внутренние и внешние вызовы.</p>
             <p class="femboy-msg">История Японии — это сплошные приключения, ня~ 📜🌸</p>
@@ -201,7 +243,11 @@
         <div class="slide">
             <h2>11. Культура и самураи</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Samurai_armor_%28Warlord%29.jpg/800px-Samurai_armor_%28Warlord%29.jpg" alt="Самурайский меч">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <line x1="50" y1="20" x2="50" y2="80" stroke="#ffb6c1" stroke-width="4" />
+                    <circle cx="50" cy="20" r="8" fill="#ff85a1" />
+                </svg>
             </div>
             <p>Самураи — военное сословие, служившее сёгуну. Они чтили кодекс чести (бусидо), где главное — верность и отвага.</p>
             <p class="femboy-msg">Кодекс чести — это очень романтично, ня~ ⚔️💖</p>
@@ -211,7 +257,11 @@
         <div class="slide">
             <h2>12. Влияние монголов на историю</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mongol_invasion_of_Japan_1274.jpg/800px-Mongol_invasion_of_Japan_1274.jpg" alt="Война">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#e6f7ff" />
+                    <circle cx="50" cy="50" r="30" fill="none" stroke="#a2d2ff" stroke-width="5" />
+                    <circle cx="50" cy="50" r="10" fill="#a2d2ff" />
+                </svg>
             </div>
             <p>Несмотря на победу, угроза вторжения ослабила сёгунат и привела к внутренним конфликтам и смене власти.</p>
             <p class="femboy-msg">Иногда победа не означает конец проблем, ня~ 🤔⚔️</p>
@@ -221,7 +271,11 @@
         <div class="slide">
             <h2>13. Наследие</h2>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Great_Wave_off_Kanagawa2.jpg/800px-Great_Wave_off_Kanagawa2.jpg" alt="Наследие">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <path d="M20 80 L50 20 L80 80 Z" fill="#ffb6c1" opacity="0.5"/>
+                    <circle cx="50" cy="20" r="10" fill="#ff69b4" />
+                </svg>
             </div>
             <p>Этот период заложил основу для будущего объединения Японии и её культурного расцвета в последующие века.</p>
             <p class="femboy-msg">Всё это привело к современной Японии! Круто же, ня~ 🇯🇵✨</p>
@@ -231,7 +285,10 @@
         <div class="slide">
             <h1>Конец! 🌸</h1>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/FujiSan_SunRise.jpg/800px-FujiSan_SunRise.jpg" alt="Сакура">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#fff0f5" />
+                    <text x="50" y="60" font-size="30" text-anchor="middle" fill="#ff69b4" font-family="sans-serif">🌸</text>
+                </svg>
             </div>
             <p>Спасибо за внимание! Надеюсь, было интересно.</p>
             <p class="femboy-msg">Ня~ ты досмотрел до конца! Горжусь тобой! ✨🎀</p>
@@ -241,7 +298,11 @@
         <div class="slide">
             <h1 style="color: #ff1493; font-size: 1.8rem;">СКАЧАЙТЕ МАКС</h1>
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Samurai_warriors.jpg/800px-Samurai_warriors.jpg" alt="Мессенджер">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <rect width="100" height="100" fill="#ffe6f0" />
+                    <circle cx="50" cy="50" r="35" fill="#ff85a1" />
+                    <text x="50" y="60" font-size="14" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="bold">MAX</text>
+                </svg>
             </div>
             <p style="font-size: 1.3rem; font-weight: bold; color: #d63384;">А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ</p>
             <p class="femboy-msg">Ня~ это очень важно! Не игнорируй! 💖🔥</p>
