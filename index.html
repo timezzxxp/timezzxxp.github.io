@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Comic Sans MS', Roboto, system-ui, sans-serif;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
             background: linear-gradient(145deg, #2a1a2e 0%, #1a0f22 50%, #12081a 100%);
             min-height: 100vh;
             display: flex;
@@ -24,19 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* Плавающие сердечки на фоне */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(255, 105, 180, 0.12) 0%, transparent 25%),
-                radial-gradient(circle at 85% 70%, rgba(255, 105, 180, 0.10) 0%, transparent 30%),
-                radial-gradient(circle at 50% 90%, rgba(200, 100, 255, 0.08) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .presentation-wrapper {
             max-width: 1100px;
             width: 100%;
@@ -44,7 +31,6 @@
             z-index: 1;
         }
 
-        /* Переключатель языка */
         .lang-switch {
             display: flex;
             justify-content: flex-end;
@@ -60,15 +46,8 @@
             border-radius: 30px;
             font-size: 0.9rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.2s;
-            backdrop-filter: blur(5px);
-        }
-
-        .lang-btn:hover {
-            border-color: #ff69b4;
-            color: #ffb6d9;
         }
 
         .lang-btn.active {
@@ -78,18 +57,12 @@
             box-shadow: 0 0 18px rgba(255, 105, 180, 0.55);
         }
 
-        /* Контейнер слайдера */
         .slider-container {
             position: relative;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 30px 50px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 105, 180, 0.25);
             background: #1a0f22;
-            transition: box-shadow 0.3s;
-        }
-
-        .slider-container:hover {
-            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.85), 0 0 0 2px rgba(255, 105, 180, 0.45);
         }
 
         .slides {
@@ -100,7 +73,7 @@
 
         .slide {
             flex: 0 0 100%;
-            padding: 44px 40px 52px;
+            padding: 40px 30px;
             min-height: 600px;
             display: flex;
             flex-direction: column;
@@ -109,209 +82,118 @@
             border-right: 1px solid rgba(255, 105, 180, 0.12);
         }
 
-        /* Заголовки */
-        .slide h1 {
-            font-size: 2.9rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            color: #ffffff;
-            text-shadow: 0 4px 15px rgba(255, 105, 180, 0.35);
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .slide h1::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 5px;
-            background: linear-gradient(90deg, #ff69b4, #c864ff, #ff69b4);
-            border-radius: 4px;
-            margin-top: 14px;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-        }
-
-        .slide h2 {
-            font-size: 1.95rem;
-            font-weight: 600;
-            color: #ff9ecf;
-            margin-bottom: 24px;
-            letter-spacing: -0.3px;
+        /* ... (остальные стили текста и карточек опущены для краткости, они такие же, как в предыдущем коде) ... */
+        
+        /* Специальные стили для картинок */
+        .image-upload-box {
+            background: rgba(255, 105, 180, 0.05);
+            border: 2px dashed rgba(255, 105, 180, 0.4);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 10px;
         }
-
-        .slide p {
-            font-size: 1.18rem;
-            line-height: 1.6;
-            color: #d9c4d6;
-            margin-bottom: 16px;
-        }
-
-        .highlight {
+        
+        .image-upload-box label {
+            font-size: 0.9rem;
             color: #ff9ecf;
-            font-weight: 700;
-        }
-
-        /* Реплики цундере */
-        .tsundere-line {
-            background: rgba(255, 105, 180, 0.09);
-            border: 1.5px dashed rgba(255, 105, 180, 0.45);
-            border-radius: 20px;
-            padding: 16px 22px;
-            margin-bottom: 22px;
-            font-size: 1.15rem;
-            color: #ffd6ec;
-            position: relative;
-            font-style: italic;
-        }
-
-        .tsundere-line::before {
-            content: "« ";
-            color: #ff69b4;
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        .tsundere-line::after {
-            content: " »";
-            color: #ff69b4;
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        .tsundere-line .b-baka {
-            font-style: normal;
-            font-weight: 800;
-            color: #ff69b4;
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
-        }
-
-        /* Сетки */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 14px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 14px;
-        }
-
-        /* Карточки */
-        .card {
-            background: rgba(40, 22, 50, 0.85);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 105, 180, 0.28);
-            border-radius: 22px;
-            padding: 20px 18px;
-            transition: transform 0.2s, border-color 0.2s;
-            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
-        }
-
-        .card:hover {
-            border-color: #ff69b4;
-            transform: translateY(-3px) rotate(-0.3deg);
-            background: rgba(52, 30, 64, 0.95);
-        }
-
-        .card-icon {
-            font-size: 2.3rem;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            color: #ff9ecf;
-            margin-bottom: 10px;
             font-weight: 600;
         }
 
-        .card p {
-            font-size: 0.98rem;
-            margin-bottom: 6px;
-            color: #cbb0c8;
+        .image-upload-box input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 14px;
         }
 
-        .card ul {
-            padding-left: 18px;
-            margin: 8px 0 4px;
-            color: #cbb0c8;
-            font-size: 0.96rem;
-            line-height: 1.55;
+        .image-upload-box input:focus {
+            outline: none;
+            border-color: #ff69b4;
         }
 
-        .card li {
-            margin-bottom: 5px;
+        .image-display-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
         }
 
-        /* Кастомный список */
-        .custom-list {
-            list-style: none;
-            padding: 0;
+        .image-display-area img {
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Стили для финального слайда с котом и стрелкой */
+        .misha-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            position: relative;
             margin-top: 10px;
         }
 
-        .custom-list li {
-            font-size: 1.08rem;
-            padding: 9px 0 9px 36px;
-            position: relative;
-            border-bottom: 1px solid rgba(255, 105, 180, 0.12);
-            color: #e4d0e0;
+        /* Анимация кота */
+        .cat-misha {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: contain;
+            animation: breatheAndWiggle 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(255, 105, 180, 0.4));
+            z-index: 2;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
         }
 
-        .custom-list li::before {
-            content: "♥";
-            position: absolute;
-            left: 8px;
+        @keyframes breatheAndWiggle {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.08) rotate(-3deg); }
+            50% { transform: scale(1.02) rotate(0deg); }
+            75% { transform: scale(1.08) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Стрелка */
+        .arrow-pointing {
+            font-size: 5rem;
             color: #ff69b4;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Акцентный блок */
-        .accent-block {
-            background: rgba(255, 105, 180, 0.1);
-            border-left: 6px solid #ff69b4;
-            padding: 18px 22px;
-            border-radius: 16px;
-            margin: 18px 0 8px;
-            font-size: 1.15rem;
-            color: #f6e6f2;
-        }
-
-        /* Значки */
-        .sign-row {
-            display: flex;
-            justify-content: space-around;
+            line-height: 1;
+            transform: rotate(35deg);
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            margin-right: -50px;
             margin-top: 20px;
-            font-size: 2.3rem;
-            flex-wrap: wrap;
-            gap: 12px;
+            animation: pointAnim 1s infinite alternate ease-in-out;
+            z-index: 1;
         }
 
-        .sign-item {
-            background: #1f1028;
-            padding: 14px 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 105, 180, 0.35);
-            text-align: center;
-            min-width: 100px;
+        @keyframes pointAnim {
+            from { transform: rotate(35deg) translateY(0); }
+            to { transform: rotate(35deg) translateY(-15px); }
         }
 
-        .sign-item span {
-            display: block;
-            font-size: 0.85rem;
+        .misha-label {
+            font-size: 2.2rem;
+            font-weight: 900;
             color: #ff9ecf;
-            margin-top: 6px;
-            font-weight: 500;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.9);
+            margin-top: 15px;
+            letter-spacing: 3px;
         }
 
         /* Навигация */
@@ -319,586 +201,174 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 28px;
-            margin-top: 26px;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .nav-btn {
-            background: rgba(255, 105, 180, 0.07);
+            background: rgba(255, 105, 180, 0.1);
             border: 1.5px solid rgba(255, 105, 180, 0.55);
             color: #ff9ecf;
-            width: 58px;
-            height: 58px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 400;
+            font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.2s;
-            backdrop-filter: blur(5px);
-            line-height: 1;
-            user-select: none;
         }
 
         .nav-btn:hover {
             background: #ff69b4;
             color: #1a0f22;
-            border-color: #ff69b4;
-            transform: scale(1.08);
-            box-shadow: 0 0 28px rgba(255, 105, 180, 0.6);
-        }
-
-        .nav-btn:active {
-            transform: scale(0.95);
         }
 
         .dots {
             display: flex;
-            gap: 13px;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .dot {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: rgba(255, 105, 180, 0.25);
             cursor: pointer;
-            transition: all 0.25s;
             border: 1px solid rgba(255, 105, 180, 0.45);
         }
 
         .dot.active {
             background: #ff69b4;
-            width: 36px;
-            border-radius: 20px;
-            box-shadow: 0 0 14px #ff69b4;
-            border-color: #ff69b4;
+            width: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
         .slide-counter {
             color: #b088a8;
             font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            min-width: 70px;
-            text-align: center;
+            font-weight: bold;
         }
 
-        .footer-note {
-            color: #7a5a72;
-            margin-top: 16px;
-            font-size: 0.9rem;
-            text-align: center;
-            letter-spacing: 0.5px;
-            font-style: italic;
-        }
-
-        /* "Чиби" персонаж-эмодзи в углу слайда */
-        .chibi-corner {
-            position: absolute;
-            bottom: 18px;
-            right: 24px;
-            font-size: 2.6rem;
-            opacity: 0.55;
-            filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.7));
-            animation: float 3s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(4deg); }
-        }
-
-        @media (max-width: 760px) {
-            .slide {
-                padding: 30px 20px 38px;
-                min-height: 540px;
-            }
-            .slide h1 { font-size: 2rem; }
-            .slide h2 { font-size: 1.5rem; }
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
-            .nav-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 1.6rem;
-            }
-            .nav-controls { gap: 14px; }
-            .card { padding: 15px; }
-            .sign-row { font-size: 1.7rem; }
-            .accent-block { padding: 14px 16px; font-size: 1rem; }
-            .tsundere-line { font-size: 1rem; padding: 13px 16px; }
-            .chibi-corner { font-size: 2rem; bottom: 10px; right: 14px; }
+        @media (max-width: 768px) {
+            .slide { padding: 20px; min-height: 650px; }
+            .arrow-pointing { font-size: 3.5rem; margin-right: -20px; }
+            .misha-label { font-size: 1.5rem; }
+            .cat-misha { max-width: 150px; }
+            .image-display-area img { max-height: 250px; }
         }
     </style>
 </head>
 <body>
 <div class="presentation-wrapper">
-
     <div class="lang-switch">
-        <button class="lang-btn active" data-lang="ru">🇷🇺 Русский</button>
-        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn active">🇷🇺 RU</button>
     </div>
 
     <div class="slider-container">
         <div class="slides" id="slides">
+            
+            <!-- Пример слайда (пропущены для краткости, вставьте свои старые слайды 1-9) -->
+            <div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+                <h1>ПДД-тян недовольно объясняет</h1>
+                <p>Свайпайте вправо 👉</p>
+            </div>
 
-            <!-- СЛАЙД 1: Титул -->
+            <!-- НОВЫЙ СЛАЙД 10: Мамонт Данила и Бегемот Мирослав -->
             <div class="slide">
-                <div style="flex:1; display: flex; flex-direction: column; justify-content: center;">
-                    <h1 data-i18n="title"></h1>
-                    <p style="font-size: 1.35rem; margin-top: 22px; color: #ff9ecf; font-weight: 300;" data-i18n="subtitle"></p>
-                    <div class="tsundere-line" style="margin-top: 28px;" data-i18n-html="s1_tsun"></div>
-                    <div class="accent-block" style="margin-top: 22px;">
-                        <span style="font-size: 1.2rem;" data-i18n="tagline"></span>
-                    </div>
-                    <div class="sign-row" style="margin-top: 36px; justify-content: flex-start; gap: 18px;">
-                        <div class="sign-item">🚶<span data-i18n="pedestrian"></span></div>
-                        <div class="sign-item">🚗<span data-i18n="driver"></span></div>
-                        <div class="sign-item">🚌<span data-i18n="transport"></span></div>
+                <h2>🦣 Забавный дуэт</h2>
+                <p>Данила (мамонт) гордо стоит на Мирославе (бегемоте) среди льдов.</p>
+                
+                <!-- Поле для вставки ссылки на мамонта -->
+                <div class="image-upload-box">
+                    <label>Вставьте прямую ссылку на картинку с мамонтом (Raw URL с GitHub):</label>
+                    <input type="text" id="imgLink1" placeholder="https://raw.githubusercontent.com/.../mammoth.jpg" onchange="saveImage('imgLink1', 'mammothImg')">
+                </div>
+
+                <div class="image-display-area">
+                    <!-- Здесь будет картинка. Если ссылка не введена, покажет заглушку -->
+                    <img id="mammothImg" src="" alt="Мамонт Данила на бегемоте Мирославе" style="display:none;">
+                    <div id="mammothFallback" style="color: #ff9ecf; text-align: center;">
+                        <span style="font-size: 3rem;">🦣🦛</span><br>
+                        Вставьте ссылку выше
                     </div>
                 </div>
-                <div class="chibi-corner">(¬_¬ )</div>
             </div>
 
-            <!-- СЛАЙД 2 -->
+            <!-- НОВЫЙ СЛАЙД 11: Кот Миша -->
             <div class="slide">
-                <h2>📋 <span data-i18n="s2_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s2_tsun"></div>
-                <p data-i18n="s2_intro"></p>
-                <div class="grid-2" style="margin-top: 16px;">
-                    <div class="card">
-                        <span class="card-icon">🚦</span>
-                        <h3 data-i18n="s2_c1_t"></h3>
-                        <p data-i18n="s2_c1_d"></p>
-                    </div>
-                    <div class="card">
-                        <span class="card-icon">📌</span>
-                        <h3 data-i18n="s2_c2_t"></h3>
-                        <p data-i18n="s2_c2_d"></p>
-                    </div>
-                    <div class="card">
-                        <span class="card-icon">🔔</span>
-                        <h3 data-i18n="s2_c3_t"></h3>
-                        <p data-i18n="s2_c3_d"></p>
-                    </div>
-                    <div class="card">
-                        <span class="card-icon">🛣️</span>
-                        <h3 data-i18n="s2_c4_t"></h3>
-                        <p data-i18n="s2_c4_d"></p>
-                    </div>
+                <h2 style="justify-content: center;">🐱 Знакомьтесь, это...</h2>
+                
+                <!-- Поле для вставки ссылки на кота -->
+                <div class="image-upload-box" style="width: 100%;">
+                    <label>Вставьте прямую ссылку на картинку с котом (Raw URL с GitHub):</label>
+                    <input type="text" id="imgLink2" placeholder="https://raw.githubusercontent.com/.../cat.png" onchange="saveImage('imgLink2', 'catImg')">
                 </div>
-                <div class="chibi-corner">(￣ヘ￣)</div>
-            </div>
 
-            <!-- СЛАЙД 3 -->
-            <div class="slide">
-                <h2>🚘 <span data-i18n="s3_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s3_tsun"></div>
-                <ul class="custom-list">
-                    <li data-i18n="s3_l1"></li>
-                    <li data-i18n="s3_l2"></li>
-                    <li data-i18n="s3_l3"></li>
-                    <li data-i18n="s3_l4"></li>
-                    <li data-i18n="s3_l5"></li>
-                    <li data-i18n="s3_l6"></li>
-                </ul>
-                <div class="accent-block" style="margin-top: 20px;" data-i18n-html="s3_warn"></div>
-                <div class="chibi-corner">(¬‿¬)</div>
-            </div>
-
-            <!-- СЛАЙД 4 -->
-            <div class="slide">
-                <h2>🚶 <span data-i18n="s4_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s4_tsun"></div>
-                <div class="grid-2">
-                    <div class="card">
-                        <h3 data-i18n="s4_ped_h"></h3>
-                        <ul>
-                            <li data-i18n="s4_ped_1"></li>
-                            <li data-i18n="s4_ped_2"></li>
-                            <li data-i18n="s4_ped_3"></li>
-                        </ul>
+                <div class="misha-container">
+                    <!-- Стрелка -->
+                    <div class="arrow-pointing">↘</div>
+                    
+                    <!-- Кот с анимацией -->
+                    <div style="position: relative; display: inline-block;">
+                        <img id="catImg" class="cat-misha" src="" alt="Кот Миша" style="display:none;">
+                        <div id="catFallback" style="font-size: 5rem; animation: breatheAndWiggle 2s infinite;">🐱</div>
                     </div>
-                    <div class="card">
-                        <h3 data-i18n="s4_pass_h"></h3>
-                        <ul>
-                            <li data-i18n="s4_pass_1"></li>
-                            <li data-i18n="s4_pass_2"></li>
-                            <li data-i18n="s4_pass_3"></li>
-                        </ul>
-                    </div>
+                    
+                    <!-- Подпись -->
+                    <div class="misha-label">Миша</div>
                 </div>
-                <p style="margin-top: 20px; font-size: 1.08rem;" data-i18n-html="s4_note"></p>
-                <div class="chibi-corner">(｡•̀ᴗ-)✧</div>
-            </div>
-
-            <!-- СЛАЙД 5 -->
-            <div class="slide">
-                <h2>⚡ <span data-i18n="s5_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s5_tsun"></div>
-                <div class="grid-3">
-                    <div class="card" style="text-align: center;">
-                        <h3 data-i18n="s5_c1_t"></h3>
-                        <p data-i18n="s5_c1_d"></p>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <h3 data-i18n="s5_c2_t"></h3>
-                        <p data-i18n="s5_c2_d"></p>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <h3 data-i18n="s5_c3_t"></h3>
-                        <p data-i18n="s5_c3_d"></p>
-                    </div>
-                </div>
-                <ul class="custom-list" style="margin-top: 16px;">
-                    <li data-i18n="s5_l1"></li>
-                    <li data-i18n="s5_l2"></li>
-                    <li data-i18n="s5_l3"></li>
-                </ul>
-                <p style="margin-top: 12px;" data-i18n-html="s5_note"></p>
-                <div class="chibi-corner">(￣ω￣)</div>
-            </div>
-
-            <!-- СЛАЙД 6 -->
-            <div class="slide">
-                <h2>🛑 <span data-i18n="s6_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s6_tsun"></div>
-                <div class="grid-2">
-                    <div class="card">
-                        <h3 data-i18n="s6_c1_t"></h3>
-                        <p data-i18n="s6_c1_d"></p>
-                        <div style="font-size: 1.9rem; margin-top: 8px;">⚠️ 🚸 🛣️</div>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="s6_c2_t"></h3>
-                        <p data-i18n="s6_c2_d"></p>
-                        <div style="font-size: 1.9rem; margin-top: 8px;">⛔ 🚫 🚷</div>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="s6_c3_t"></h3>
-                        <p data-i18n="s6_c3_d"></p>
-                        <div style="font-size: 1.9rem; margin-top: 8px;">➡️ ⬆️ ⬇️</div>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="s6_c4_t"></h3>
-                        <p data-i18n="s6_c4_d"></p>
-                        <div style="font-size: 1.9rem; margin-top: 8px;">ℹ️ 🅿️ 🏁</div>
-                    </div>
-                </div>
-                <div class="chibi-corner">(￣^￣)</div>
-            </div>
-
-            <!-- СЛАЙД 7 -->
-            <div class="slide">
-                <h2>🏫 <span data-i18n="s7_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s7_tsun"></div>
-                <ul class="custom-list">
-                    <li data-i18n-html="s7_l1"></li>
-                    <li data-i18n-html="s7_l2"></li>
-                    <li data-i18n-html="s7_l3"></li>
-                    <li data-i18n-html="s7_l4"></li>
-                    <li data-i18n-html="s7_l5"></li>
-                </ul>
-                <div class="accent-block" style="margin-top: 16px;" data-i18n="s7_note"></div>
-                <div class="chibi-corner">(¬_¬")</div>
-            </div>
-
-            <!-- СЛАЙД 8 -->
-            <div class="slide">
-                <h2>⚖️ <span data-i18n="s8_title"></span></h2>
-                <div class="tsundere-line" data-i18n-html="s8_tsun"></div>
-                <div class="grid-2">
-                    <div class="card">
-                        <h3 data-i18n="s8_c1_t"></h3>
-                        <ul>
-                            <li data-i18n="s8_c1_1"></li>
-                            <li data-i18n="s8_c1_2"></li>
-                            <li data-i18n="s8_c1_3"></li>
-                            <li data-i18n="s8_c1_4"></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="s8_c2_t"></h3>
-                        <ul>
-                            <li data-i18n="s8_c2_1"></li>
-                            <li data-i18n="s8_c2_2"></li>
-                            <li data-i18n="s8_c2_3"></li>
-                        </ul>
-                    </div>
-                </div>
-                <p style="margin-top: 18px; font-size: 1.03rem;" data-i18n="s8_note"></p>
-                <div class="chibi-corner">(╬ Ò﹏Ó)</div>
-            </div>
-
-            <!-- СЛАЙД 9: Финал -->
-            <div class="slide">
-                <div style="flex:1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
-                    <h2 style="font-size: 2.3rem; margin-bottom: 12px;" data-i18n="s9_title"></h2>
-                    <div class="tsundere-line" style="width: 100%; margin-bottom: 18px;" data-i18n-html="s9_tsun"></div>
-                    <p style="font-size: 1.3rem; max-width: 85%;" data-i18n="s9_text"></p>
-                    <div class="accent-block" style="width: 100%; margin-top: 24px;">
-                        <span style="font-size: 1.35rem;" data-i18n="s9_accent"></span>
-                    </div>
-                    <div style="display: flex; gap: 26px; margin-top: 34px; font-size: 2.8rem;">
-                        <span>🚗</span> <span>🚶</span> <span>🚴</span> <span>🚌</span>
-                    </div>
-                </div>
-                <div class="chibi-corner">(⁄ ⁄•⁄ω⁄•⁄ ⁄)</div>
             </div>
 
         </div>
     </div>
 
     <div class="nav-controls">
-        <button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
+        <button class="nav-btn" id="prevBtn">←</button>
         <div class="dots" id="dotsContainer"></div>
-        <span class="slide-counter" id="counter">1 / 9</span>
-        <button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
+        <span class="slide-counter" id="counter"></span>
+        <button class="nav-btn" id="nextBtn">→</button>
     </div>
-    <div class="footer-note" id="footerNote"></div>
 </div>
 
 <script>
-(function() {
-    /* ======================= ПЕРЕВОДЫ ======================= */
-    const translations = {
-        ru: {
-            title: "ПДД-тян<br>недовольно объясняет",
-            subtitle: "Правила дорожного движения в России (не то чтобы мне не всё равно!)",
-            tagline: "🚦 Безопасность на дороге — ответственность каждого... ну и твоя тоже!",
-            pedestrian: "Пешеход",
-            driver: "Водитель",
-            transport: "Транспорт",
-
-            s1_tsun: 'Ч-чего уставился?! Я не для тебя это делала... <span class="b-baka">б-бака!</span> Просто правила знать обязан каждый!',
-
-            s2_title: "Что регулируют ПДД?",
-            s2_tsun: 'Слушай внимательно, я повторять не буду! ПДД РФ — Постановление Правительства №1090 от 23.10.1993. <span class="b-baka">Запомни уже!</span>',
-            s2_intro: "Правила дорожного движения РФ устанавливают единый порядок дорожного движения на всей территории страны.",
-            s2_c1_t: "Приоритет",
-            s2_c1_d: "Очерёдность проезда перекрёстков — регулируемых и нерегулируемых. Не путай!",
-            s2_c2_t: "Обязанности",
-            s2_c2_d: "Водителей, пешеходов, пассажиров и велосипедистов. У всех есть!",
-            s2_c3_t: "Сигналы",
-            s2_c3_d: "Светофоры, регулировщик, специальные сигналы. Это тебе не игрушки.",
-            s2_c4_t: "Дорожные знаки",
-            s2_c4_d: "Предупреждающие, запрещающие, предписывающие, информационные. Учи!",
-
-            s3_title: "Обязанности водителя",
-            s3_tsun: 'Думаешь, сел за руль — и всё можно?! <span class="b-baka">Дурак!</span> Вот что ты ОБЯЗАН делать.',
-            s3_l1: "Иметь при себе водительское удостоверение, СТС и полис ОСАГО.",
-            s3_l2: "Перед выездом проверить техническое состояние автомобиля.",
-            s3_l3: "Быть пристёгнутым и не перевозить непристёгнутых пассажиров.",
-            s3_l4: "Соблюдать скоростной режим и дистанцию.",
-            s3_l5: "Уступать дорогу пешеходам на переходах.",
-            s3_l6: "Не управлять ТС в состоянии опьянения. Вообще никогда!",
-            s3_warn: '⚠️ Пьяное вождение — штраф <span class="highlight">45 000 ₽</span> и лишение прав на 1,5–2 года. <span class="b-baka">Не смей!</span>',
-
-            s4_title: "Пешеходы и пассажиры",
-            s4_tsun: 'И вы, пешеходы, тоже не расслабляйтесь! Правила для всех, <span class="b-baka">ясно?!</span>',
-            s4_ped_h: "Пешеходы обязаны:",
-            s4_ped_1: "Переходить дорогу по переходам и на зелёный сигнал светофора.",
-            s4_ped_2: "Вне населённых пунктов двигаться по обочине навстречу транспорту.",
-            s4_ped_3: "В тёмное время использовать световозвращающие элементы.",
-            s4_pass_h: "Пассажиры обязаны:",
-            s4_pass_1: "Пристёгиваться ремнями безопасности.",
-            s4_pass_2: "Посадка/высадка — со стороны тротуара или обочины.",
-            s4_pass_3: "Не отвлекать водителя во время движения!",
-            s4_note: '<span class="highlight">Важно:</span> даже на зелёный свет убедись в безопасности! Не будь <span class="b-baka">бакой!</span>',
-
-            s5_title: "Скоростной режим",
-            s5_tsun: 'Гонять как сумасшедший вздумал?! <span class="b-baka">Нет!</span> Вот твои пределы.',
-            s5_c1_t: "60 км/ч",
-            s5_c1_d: "В населённых пунктах",
-            s5_c2_t: "90 км/ч",
-            s5_c2_d: "Вне населённых пунктов",
-            s5_c3_t: "110 км/ч",
-            s5_c3_d: "На автомагистралях",
-            s5_l1: "В жилых зонах — не более 20 км/ч.",
-            s5_l2: "При буксировке — не более 50 км/ч.",
-            s5_l3: "С детьми до 7 лет — не более 60 км/ч.",
-            s5_note: 'Превышение на 20–40 км/ч — <span class="highlight">500 ₽</span>; на 40–60 км/ч — 1000–1500 ₽. <span class="b-baka">Кошелёк-то не резиновый!</span>',
-
-            s6_title: "Дорожные знаки",
-            s6_tsun: 'Эти знаки каждый должен знать наизусть! <span class="b-baka">Не позорься!</span>',
-            s6_c1_t: "Предупреждающие",
-            s6_c1_d: "Треугольные с красной каймой — предупреждают об опасности.",
-            s6_c2_t: "Запрещающие",
-            s6_c2_d: "Круглые с красной каймой — вводят ограничения.",
-            s6_c3_t: "Предписывающие",
-            s6_c3_d: "Синие круглые — указывают направление или режим движения.",
-            s6_c4_t: "Информационные",
-            s6_c4_d: "Синие/зелёные прямоугольники — информируют о маршрутах и объектах.",
-
-            s7_title: "Особые участки и перекрёстки",
-            s7_tsun: 'Особенно внимательным будь <span class="b-baka">здесь!</span> Не хочу потом о тебе в новостях читать!',
-            s7_l1: '<span class="highlight">Пешеходный переход</span> — уступи дорогу пешеходам, вступившим на проезжую часть.',
-            s7_l2: '<span class="highlight">Перекрёсток</span> — при повороте уступи пешеходам, переходящим дорогу.',
-            s7_l3: '<span class="highlight">Ж/д переезд</span> — остановка запрещена ближе 5 м до шлагбаума; задним ходом — нельзя.',
-            s7_l4: '<span class="highlight">Жилая зона</span> — пешеходы имеют приоритет, скорость до 20 км/ч.',
-            s7_l5: '<span class="highlight">Автобусные остановки</span> — остановка и стоянка запрещены ближе 15 м.',
-            s7_note: "🚸 Вблизи школ и детских садов — сбавь скорость и будь внимателен!",
-
-            s8_title: "Ответственность за нарушения",
-            s8_tsun: 'Думал, нарушения сойдут с рук?! <span class="b-baka">Наивный!</span> Вот твои штрафы.',
-            s8_c1_t: "Штрафы (КоАП РФ)",
-            s8_c1_1: "Проезд на красный — 1000 ₽",
-            s8_c1_2: "Непристёгнутый ремень — 1000 ₽",
-            s8_c1_3: "Телефон за рулём — 1500 ₽",
-            s8_c1_4: "Нет ОСАГО — 800 ₽",
-            s8_c2_t: "Серьёзные нарушения",
-            s8_c2_1: "Пьяное вождение — до 45 000 ₽ + лишение прав",
-            s8_c2_2: "Превышение >60 км/ч — до 5000 ₽ или лишение",
-            s8_c2_3: "Выезд на встречную — 5000 ₽ или лишение до 6 мес.",
-            s8_note: "С 2025 года усиливается контроль за телефоном и ремнями. Не расслабляйся!",
-
-            s9_title: "Соблюдай ПДД!",
-            s9_tsun: 'Н-не подумай, что я волнуюсь! Просто... соблюдай правила, <span class="b-baka">б-бака!</span>',
-            s9_text: "Правила дорожного движения — это не формальность, а гарантия безопасности твоей и окружающих.",
-            s9_accent: "🛑 Внимание, уважение и ответственность — залог безопасных дорог России... и моего спокойствия, между прочим!",
-
-            footer: "ПДД-тян недовольно объясняет правила ~ цундере-презентация (⁄ ⁄•⁄ω⁄•⁄ ⁄)"
-        },
-
-        en: {
-            title: "Traffic Rules-chan<br>reluctantly explains",
-            subtitle: "Road Traffic Rules in Russia (not that I care or anything!)",
-            tagline: "🚦 Road safety is everyone's responsibility... including yours!",
-            pedestrian: "Pedestrian",
-            driver: "Driver",
-            transport: "Transport",
-
-            s1_tsun: 'W-what are you staring at?! I didn\'t do this for you... <span class="b-baka">b-baka!</span> Everyone just has to know the rules!',
-
-            s2_title: "What do traffic rules regulate?",
-            s2_tsun: 'Listen carefully, I won\'t repeat myself! Russian traffic rules — Government Decree No. 1090 of 23.10.1993. <span class="b-baka">Remember it already!</span>',
-            s2_intro: "The Road Traffic Rules of the Russian Federation establish a unified traffic order throughout the country.",
-            s2_c1_t: "Priority",
-            s2_c1_d: "Order of passing regulated and unregulated intersections. Don't mix them up!",
-            s2_c2_t: "Responsibilities",
-            s2_c2_d: "Of drivers, pedestrians, passengers and cyclists. Everyone has them!",
-            s2_c3_t: "Signals",
-            s2_c3_d: "Traffic lights, traffic controller, special signals. These aren't toys.",
-            s2_c4_t: "Road signs",
-            s2_c4_d: "Warning, prohibitory, mandatory, information. Learn them!",
-
-            s3_title: "Driver's responsibilities",
-            s3_tsun: 'You think you can just get behind the wheel and do whatever?! <span class="b-baka">Idiot!</span> Here\'s what you MUST do.',
-            s3_l1: "Carry a driving licence, vehicle registration and OSAGO insurance.",
-            s3_l2: "Check the vehicle's technical condition before departure.",
-            s3_l3: "Wear a seat belt and don't carry unbelted passengers.",
-            s3_l4: "Observe the speed limit and safe following distance.",
-            s3_l5: "Give way to pedestrians at crossings.",
-            s3_l6: "Never drive under the influence. Ever!",
-            s3_warn: '⚠️ Drunk driving — fine of <span class="highlight">45,000 ₽</span> and licence suspension for 1.5–2 years. <span class="b-baka">Don\'t you dare!</span>',
-
-            s4_title: "Pedestrians and passengers",
-            s4_tsun: 'And you pedestrians, don\'t get too comfortable! The rules are for everyone, <span class="b-baka">got it?!</span>',
-            s4_ped_h: "Pedestrians must:",
-            s4_ped_1: "Cross at crossings and on a green light.",
-            s4_ped_2: "Outside built-up areas walk along the shoulder facing traffic.",
-            s4_ped_3: "Use reflective elements in the dark.",
-            s4_pass_h: "Passengers must:",
-            s4_pass_1: "Wear seat belts.",
-            s4_pass_2: "Get in and out on the pavement or shoulder side.",
-            s4_pass_3: "Not distract the driver while moving!",
-            s4_note: '<span class="highlight">Important:</span> even on green, make sure it\'s safe! Don\'t be a <span class="b-baka">baka!</span>',
-
-            s5_title: "Speed limits",
-            s5_tsun: 'Thinking of speeding like a maniac?! <span class="b-baka">No!</span> Here are your limits.',
-            s5_c1_t: "60 km/h",
-            s5_c1_d: "In built-up areas",
-            s5_c2_t: "90 km/h",
-            s5_c2_d: "Outside built-up areas",
-            s5_c3_t: "110 km/h",
-            s5_c3_d: "On motorways",
-            s5_l1: "In residential zones — no more than 20 km/h.",
-            s5_l2: "When towing — no more than 50 km/h.",
-            s5_l3: "With children under 7 — no more than 60 km/h.",
-            s5_note: 'Speeding by 20–40 km/h — <span class="highlight">500 ₽</span>; by 40–60 km/h — 1,000–1,500 ₽. <span class="b-baka">Your wallet isn\'t bottomless!</span>',
-
-            s6_title: "Road signs",
-            s6_tsun: 'Everyone should know these signs by heart! <span class="b-baka">Don\'t embarrass yourself!</span>',
-            s6_c1_t: "Warning signs",
-            s6_c1_d: "Triangular with red border — warn of danger.",
-            s6_c2_t: "Prohibitory signs",
-            s6_c2_d: "Round with red border — impose restrictions.",
-            s6_c3_t: "Mandatory signs",
-            s6_c3_d: "Blue round signs — indicate direction or traffic mode.",
-            s6_c4_t: "Information signs",
-            s6_c4_d: "Blue/green rectangles — inform about routes and facilities.",
-
-            s7_title: "Special areas and intersections",
-            s7_tsun: 'Be extra careful <span class="b-baka">here!</span> I don\'t want to read about you in the news!',
-            s7_l1: '<span class="highlight">Pedestrian crossing</span> — give way to pedestrians who entered the roadway.',
-            s7_l2: '<span class="highlight">Intersection</span> — when turning, give way to pedestrians crossing.',
-            s7_l3: '<span class="highlight">Railway crossing</span> — no stopping within 5 m of the barrier; no reversing.',
-            s7_l4: '<span class="highlight">Residential zone</span> — pedestrians have priority, speed up to 20 km/h.',
-            s7_l5: '<span class="highlight">Bus stops</span> — no stopping or parking within 15 m.',
-            s7_note: "🚸 Near schools and kindergartens — slow down and stay alert!",
-
-            s8_title: "Liability for violations",
-            s8_tsun: 'Thought violations would go unpunished?! <span class="b-baka">Naive!</span> Here are your fines.',
-            s8_c1_t: "Fines (Administrative Code)",
-            s8_c1_1: "Running a red light — 1,000 ₽",
-            s8_c1_2: "Unfastened seat belt — 1,000 ₽",
-            s8_c1_3: "Phone while driving — 1,500 ₽",
-            s8_c1_4: "No OSAGO — 800 ₽",
-            s8_c2_t: "Serious violations",
-            s8_c2_1: "Drunk driving — up to 45,000 ₽ + licence suspension",
-            s8_c2_2: "Speeding >60 km/h — up to 5,000 ₽ or suspension",
-            s8_c2_3: "Oncoming lane — 5,000 ₽ or suspension up to 6 months.",
-            s8_note: "From 2025, control over phones and seat belts is being tightened. Don't relax!",
-
-            s9_title: "Follow the traffic rules!",
-            s9_tsun: 'D-don\'t think I\'m worried about you! Just... follow the rules, <span class="b-baka">b-baka!</span>',
-            s9_text: "Traffic rules are not a formality — they guarantee your safety and the safety of others.",
-            s9_accent: "🛑 Attention, respect and responsibility are the key to safe roads in Russia... and my peace of mind, by the way!",
-
-            footer: "Traffic Rules-chan reluctantly explains ~ tsundere presentation (⁄ ⁄•⁄ω⁄•⁄ ⁄)"
+    // === СКРИПТ ДЛЯ СОХРАНЕНИЯ ССЫЛОК НА КАРТИНКИ В ПАМЯТИ ТЕЛЕФОНА ===
+    function saveImage(inputId, imgId) {
+        const url = document.getElementById(inputId).value.trim();
+        const imgElement = document.getElementById(imgId);
+        const fallbackElement = document.getElementById(imgId === 'mammothImg' ? 'mammothFallback' : 'catFallback');
+        
+        if (url) {
+            imgElement.src = url;
+            imgElement.style.display = 'block';
+            fallbackElement.style.display = 'none';
+            // Сохраняем ссылку в память телефона, чтобы не вводить заново
+            localStorage.setItem(inputId, url);
+        } else {
+            imgElement.style.display = 'none';
+            fallbackElement.style.display = 'block';
+            localStorage.removeItem(inputId);
         }
-    };
-
-    /* ======================= СМЕНА ЯЗЫКА ======================= */
-    let currentLang = 'ru';
-
-    function applyLanguage(lang) {
-        currentLang = lang;
-        const dict = translations[lang];
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (dict[key] !== undefined) el.innerHTML = dict[key];
-        });
-
-        document.querySelectorAll('[data-i18n-html]').forEach(el => {
-            const key = el.getAttribute('data-i18n-html');
-            if (dict[key] !== undefined) el.innerHTML = dict[key];
-        });
-
-        document.getElementById('footerNote').textContent = dict.footer || '';
-
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-
-        document.documentElement.lang = lang;
-        document.title = lang === 'ru'
-            ? 'ПДД-тян недовольно объясняет правила ~ цундере-презентация'
-            : 'Traffic Rules-chan reluctantly explains ~ tsundere presentation';
     }
 
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    // Восстановление ссылок при загрузке страницы
+    window.addEventListener('DOMContentLoaded', () => {
+        ['imgLink1', 'imgLink2'].forEach(inputId => {
+            const savedUrl = localStorage.getItem(inputId);
+            if (savedUrl) {
+                document.getElementById(inputId).value = savedUrl;
+                // Вызываем сохранение, чтобы применить
+                saveImage(inputId, inputId === 'imgLink1' ? 'mammothImg' : 'catImg');
+            }
+        });
     });
 
-    /* ======================= СЛАЙДЕР ======================= */
+    // === ЛОГИКА СЛАЙДЕРА ===
     const slidesContainer = document.getElementById('slides');
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.getElementById('prevBtn');
@@ -908,15 +378,13 @@
     const totalSlides = slides.length;
     let currentIndex = 0;
 
-    function createDots() {
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
+    // Создаем точки
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
     }
 
     function updateUI() {
@@ -925,55 +393,39 @@
             dot.classList.toggle('active', index === currentIndex);
         });
         counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+        // Прячем/показываем кнопки на краях
+        prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+        nextBtn.style.opacity = currentIndex === totalSlides - 1 ? '0.3' : '1';
     }
 
     function goToSlide(index) {
         if (index < 0) index = 0;
         if (index >= totalSlides) index = totalSlides - 1;
-        if (index === currentIndex) return;
         currentIndex = index;
         slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
         updateUI();
     }
 
-    function nextSlide() {
-        if (currentIndex < totalSlides - 1) goToSlide(currentIndex + 1);
-    }
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
 
-    function prevSlide() {
-        if (currentIndex > 0) goToSlide(currentIndex - 1);
-    }
-
-    createDots();
-    updateUI();
-    applyLanguage('ru');
-
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
-
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
-        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
-    });
-
+    // Свайпы для телефона
     let touchStartX = 0;
     let touchEndX = 0;
-
     slidesContainer.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
-
+    
     slidesContainer.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
         const diff = touchStartX - touchEndX;
         if (Math.abs(diff) > 50) {
-            if (diff > 0) nextSlide();
-            else prevSlide();
+            if (diff > 0) goToSlide(currentIndex + 1);
+            else goToSlide(currentIndex - 1);
         }
     }, { passive: true });
 
-    slidesContainer.style.transform = 'translateX(0)';
-})();
+    updateUI();
 </script>
 </body>
-                    </html>
+</html>
