@@ -1,372 +1,890 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Овечкин — 16 страниц 🎀🏒</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Nunito', sans-serif; background: linear-gradient(135deg, #ffe6f0 0%, #e6f0ff 50%, #f0e6ff 100%); color: #333; overflow-x: hidden; }
-  body::before { content: "✨ 💖 🎀 ✨ 💅 🐱 ✨"; position: fixed; top: 0; left: 0; width: 100%; font-size: 24px; opacity: 0.25; pointer-events: none; animation: sparkle 12s infinite linear; z-index: 0; }
-  @keyframes sparkle { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
-  
-  /* Кнопка перевода */
-  .lang-switch { position: fixed; top: 20px; right: 20px; background: #ff69b4; color: #fff; border: 3px solid #fff; padding: 10px 20px; border-radius: 30px; font-weight: 900; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,105,180,0.5); z-index: 999; transition: all 0.3s; animation: wiggle 2s infinite; }
-  .lang-switch:hover { background: #ff1493; transform: scale(1.1); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила дорожного движения / Traffic Rules</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* Навигация */
-  .page-nav { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 100; max-height: 90vh; overflow-y: auto; padding-right: 5px; }
-  .page-nav a { width: 12px; height: 12px; border-radius: 50%; background: #ffb6d9; border: 2px solid #fff; transition: all 0.3s; box-shadow: 0 0 8px rgba(255,105,180,0.5); flex-shrink: 0; }
-  .page-nav a.active, .page-nav a:hover { background: #ff1493; transform: scale(1.3); }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(145deg, #1a2634 0%, #0f1722 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-  /* Страницы */
-  .page { min-height: 100vh; padding: 40px 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 1; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .page.visible { opacity: 1; transform: translateY(0); }
-  .page:nth-child(even) { background: rgba(255,255,255,0.4); }
+        .presentation-wrapper {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+        }
 
-  /* Заголовки */
-  h1, h2 { font-family: 'Pacifico', cursive; color: #ff69b4; text-align: center; text-shadow: 2px 2px 0 #fff, 4px 4px 0 #ffb6d9; }
-  h1 { font-size: clamp(32px, 6vw, 54px); margin-bottom: 15px; animation: bounce 2s infinite; }
-  h2 { font-size: clamp(24px, 5vw, 40px); margin-bottom: 15px; }
-  .subtitle { font-size: 18px; color: #8a2be2; text-align: center; margin-bottom: 20px; font-weight: 700; }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        /* Переключатель языка */
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
 
-  /* Карусель (ИСПРАВЛЕНА) */
-  .carousel { background: #fff; border-radius: 20px; padding: 15px; box-shadow: 0 10px 30px rgba(255,105,180,0.3); border: 3px dashed #ffb6d9; position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
-  .carousel-window { overflow: hidden; border-radius: 15px; width: 100%; height: 50vh; min-height: 220px; max-height: 500px; background: #f8f8f8; display: flex; align-items: center; justify-content: center; }
-  .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
-  .carousel-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-  .carousel-slide img { width: 100%; height: 100%; object-fit: contain; border-radius: 15px; }
-  
-  /* Кнопки карусели */
-  .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #ff69b4; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 4px 10px rgba(255,105,180,0.5); transition: all 0.3s; z-index: 10; display: flex; align-items: center; justify-content: center; }
-  .nav-btn:hover { background: #ff1493; transform: translateY(-50%) scale(1.1); }
-  .nav-btn.prev { left: -10px; }
-  .nav-btn.next { right: -10px; }
-  .dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; background: #ffb6d9; border: none; cursor: pointer; transition: all 0.3s; }
-  .dot.active { background: #ff69b4; transform: scale(1.3); }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 215, 0, 0.35);
+            color: #a0b2c9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
 
-  /* Карточки */
-  .info-card { background: #fff; border-radius: 15px; padding: 30px; box-shadow: 0 6px 15px rgba(138,43,226,0.15); border-left: 6px solid #ff69b4; max-width: 800px; width: 100%; margin-bottom: 20px; transition: transform 0.3s; }
-  .info-card:hover { transform: translateY(-3px) rotate(-0.5deg); }
-  .info-card h3 { font-family: 'Pacifico', cursive; color: #ff69b4; margin-bottom: 15px; font-size: 28px; }
-  .info-card p { font-size: 20px; line-height: 1.8; color: #444; margin-bottom: 15px; text-align: justify; }
-  .nyan { display: block; text-align: right; color: #ff69b4; font-weight: 900; font-style: italic; margin-top: 8px; font-size: 20px; }
-  .page-img { max-width: 600px; width: 100%; border-radius: 20px; box-shadow: 0 10px 25px rgba(255,105,180,0.4); border: 4px solid #fff; margin-bottom: 20px; max-height: 45vh; object-fit: contain; }
+        .lang-btn:hover {
+            border-color: #ffd966;
+            color: #ffd966;
+        }
 
-  /* КОТИК, СТРЕЛКА И ПОДПИСЬ */
-  .cat-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
-  .cat-img { max-width: 250px; width: 100%; border-radius: 20px; animation: wave 1.5s ease-in-out infinite; transform-origin: bottom center; }
-  
-  .arrow-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; opacity: 0; transform: translateY(10px); animation: arrowAppear 1.5s ease-out 0.5s forwards, floatArrow 2s ease-in-out infinite 2s; }
-  .arrow-text { font-family: 'Pacifico', cursive; font-size: 24px; color: #ff69b4; text-shadow: 2px 2px 0 #fff; margin-bottom: 5px; }
-  .arrow-line { font-size: 30px; color: #ff1493; line-height: 1; font-weight: bold; }
-  
-  @keyframes arrowAppear { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
-  @keyframes floatArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-  @keyframes wave { 0%, 100% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-8deg) translateY(-5px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(8deg) translateY(-5px); } }
+        .lang-btn.active {
+            background: #ffd966;
+            color: #0b1219;
+            border-color: #ffd966;
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+        }
 
-  /* Финальный баннер */
-  .final-banner { background: linear-gradient(135deg, #ff69b4, #8a2be2, #00bfff); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 10px 40px rgba(138,43,226,0.4); animation: pulse 2s infinite; max-width: 800px; width: 100%; }
-  .final-banner h2 { color: #fff; text-shadow: 2px 2px 0 #ff1493; margin-bottom: 15px; animation: glow 1.5s infinite alternate; font-size: clamp(24px, 4vw, 36px); }
-  .final-banner p { color: #fff; font-size: 18px; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin-bottom: 10px; }
-  .download-btn { display: inline-block; margin-top: 15px; background: #fff; color: #ff1493; padding: 12px 30px; border-radius: 50px; font-weight: 900; font-size: 18px; text-decoration: none; box-shadow: 0 6px 0 #ff1493; transition: all 0.2s; }
-  .download-btn:hover { transform: translateY(4px); box-shadow: 0 2px 0 #ff1493; }
+        /* Слайдер контейнер */
+        .slider-container {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 215, 0, 0.2);
+            background: #0b1219;
+            transition: box-shadow 0.3s;
+        }
 
-  footer { text-align: center; padding: 15px; color: #8a2be2; font-weight: 700; font-size: 14px; position: relative; z-index: 1; }
+        .slider-container:hover {
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(255, 215, 0, 0.4);
+        }
 
-  /* НЯН-КЕТ */
-  .nyan-container { position: fixed; bottom: 15px; left: -400px; z-index: 50; pointer-events: none; animation: runNyan 8s linear infinite; display: flex; align-items: center; }
-  .nyan-img { width: 100px; height: auto; image-rendering: pixelated; z-index: 2; }
-  .nyan-trail { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); width: 200px; height: 25px; background: linear-gradient(90deg, #ff0000 0%, #ff0000 14%, #ff9900 14%, #ff9900 28%, #ffff00 28%, #ffff00 42%, #00ff00 42%, #00ff00 57%, #00ccff 57%, #00ccff 71%, #6600ff 71%, #6600ff 85%, #ff00cc 85%, #ff00cc 100%); opacity: 0.8; border-radius: 10px; filter: blur(2px); animation: trailWave 0.2s linear infinite; z-index: 1; }
-  @keyframes runNyan { 0% { left: -400px; } 100% { left: 100vw; } }
-  @keyframes trailWave { 0%, 100% { transform: translateY(-50%) scaleY(1); } 50% { transform: translateY(-50%) scaleY(0.9); } }
+        .slides {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
 
-  /* Пасхалка */
-  .easter-egg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; }
-  .easter-egg img { max-width: 90%; max-height: 90%; border-radius: 15px; box-shadow: 0 0 30px #ff69b4; }
-  @keyframes glow { from { text-shadow: 2px 2px 0 #ff1493, 0 0 10px #fff; } to { text-shadow: 2px 2px 0 #ff1493, 0 0 20px #fff, 0 0 30px #ff69b4; } }
+        .slide {
+            flex: 0 0 100%;
+            padding: 48px 40px 56px;
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at 20% 30%, #1e2b3c, #0e151f 90%);
+            color: #eef5ff;
+            border-right: 1px solid rgba(255, 215, 0, 0.1);
+        }
 
-  /* Мобильная версия */
-  @media (max-width: 600px) {
-    .carousel-window { height: 40vh; min-height: 180px; }
-    .info-card { padding: 20px; }
-    .info-card p { font-size: 18px; }
-    .carousel { padding: 10px; }
-    .page { padding: 30px 10px; }
-  }
-</style>
+        .slide h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .slide h1::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd966, #ffb347, #ffd966);
+            border-radius: 4px;
+            margin-top: 14px;
+            box-shadow: 0 0 15px rgba(255, 180, 60, 0.6);
+        }
+
+        .slide h2 {
+            font-size: 2.0rem;
+            font-weight: 600;
+            color: #ffd966;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #cbd5e6;
+            margin-bottom: 16px;
+        }
+
+        .highlight {
+            color: #ffd966;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-top: 16px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: rgba(20, 30, 45, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 22px;
+            padding: 22px 20px;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.6);
+        }
+
+        .card:hover {
+            border-color: #ffd966;
+            transform: translateY(-3px);
+            background: rgba(30, 42, 60, 0.95);
+        }
+
+        .card-icon {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            color: #ffd966;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: #b8c7db;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            margin: 8px 0 4px;
+            color: #b8c7db;
+            font-size: 0.98rem;
+            line-height: 1.55;
+        }
+
+        .card li {
+            margin-bottom: 5px;
+        }
+
+        .custom-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+
+        .custom-list li {
+            font-size: 1.1rem;
+            padding: 10px 0 10px 36px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #d7e2f0;
+        }
+
+        .custom-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 8px;
+            color: #ffd966;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .accent-block {
+            background: rgba(255, 215, 0, 0.08);
+            border-left: 6px solid #ffd966;
+            padding: 20px 24px;
+            border-radius: 16px;
+            margin: 20px 0 10px;
+            font-size: 1.18rem;
+            color: #ebf0fa;
+        }
+
+        .sign-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 2.4rem;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .sign-item {
+            background: #0c141e;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .sign-item span {
+            display: block;
+            font-size: 0.85rem;
+            color: #ffd966;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 28px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 215, 0, 0.5);
+            color: #ffd966;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .nav-btn:hover {
+            background: #ffd966;
+            color: #0b1219;
+            border-color: #ffd966;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.96);
+        }
+
+        .dots {
+            display: flex;
+            gap: 14px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.25);
+            cursor: pointer;
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .dot.active {
+            background: #ffd966;
+            width: 36px;
+            border-radius: 20px;
+            box-shadow: 0 0 14px #ffd966;
+            border-color: #ffd966;
+        }
+
+        .slide-counter {
+            color: #a0b2c9;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .footer-note {
+            color: #5f738b;
+            margin-top: 18px;
+            font-size: 0.9rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 760px) {
+            .slide {
+                padding: 32px 22px 40px;
+                min-height: 520px;
+            }
+            .slide h1 {
+                font-size: 2.2rem;
+            }
+            .slide h2 {
+                font-size: 1.6rem;
+            }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .nav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 1.6rem;
+            }
+            .nav-controls {
+                gap: 16px;
+            }
+            .card {
+                padding: 16px;
+            }
+            .sign-row {
+                font-size: 1.8rem;
+            }
+            .accent-block {
+                padding: 16px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="presentation-wrapper">
 
-<button class="lang-switch" id="langBtn" onclick="handleLangClick()">🇷🇺 RU</button>
-
-<nav class="page-nav" id="pageNav">
-  <a href="#page1" title="1"></a><a href="#page2" title="2"></a><a href="#page3" title="3"></a><a href="#page4" title="4"></a>
-  <a href="#page5" title="5"></a><a href="#page6" title="6"></a><a href="#page7" title="7"></a><a href="#page8" title="8"></a>
-  <a href="#page9" title="9"></a><a href="#page10" title="10"></a><a href="#page11" title="11"></a><a href="#page12" title="12"></a>
-  <a href="#page13" title="13"></a><a href="#page14" title="14"></a><a href="#page15" title="15"></a><a href="#page16" title="16"></a>
-</nav>
-
-<section class="page" id="page1">
-  <h1 data-ru="✨ Овечкин — легенда и стиль ✨" data-en="✨ Ovechkin — Legend & Style ✨">✨ Овечкин — легенда и стиль ✨</h1>
-  <p class="subtitle" data-ru="🎀 Про Александра Овечкина 🏒💅" data-en="🎀 About Alexander Ovechkin 🏒💅">🎀 Про Александра Овечкина 🏒💅</p>
-  <div class="carousel">
-    <div class="carousel-window">
-      <div class="carousel-track" id="track">
-        <div class="carousel-slide"><img src="./1.jpg" alt="Овечкин 1"></div>
-        <div class="carousel-slide"><img src="./2.jpg" alt="Овечкин 2"></div>
-        <div class="carousel-slide"><img src="./3.jpg" alt="Овечкин 3"></div>
-        <div class="carousel-slide"><img src="./4.jpg" alt="Овечкин 4"></div>
-      </div>
+    <!-- Переключатель языка -->
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ru">🇷🇺 Русский</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
     </div>
-    <button class="nav-btn prev" onclick="moveSlide(-1)">‹</button>
-    <button class="nav-btn next" onclick="moveSlide(1)">›</button>
-    <div class="dots" id="dots"></div>
-  </div>
-</section>
 
-<section class="page" id="page2">
-  <h2 data-ru="Страница 2 — Кто он такой? 💫" data-en="Page 2 — Who is he? 💫">Страница 2 — Кто он такой? 💫</h2>
-  <div class="info-card">
-    <h3 data-ru="Александр Овечкин" data-en="Alexander Ovechkin">Александр Овечкин</h3>
-    <p data-ru="Александр Овечкин — это имя, которое знает каждый любитель хоккея. Он является капитаном команды «Вашингтон Кэпиталз» и настоящим лидером на льду. За свою карьеру он сумел завоевать Кубок Стэнли, став легендой для миллионов фанатов. Его стиль игры сочетает в себе невероятную мощь и точность броска. Болельщики обожают его не только за голы, но и за невероятную харизму. Овечкин — это человек, который изменил представление о современном хоккее. Кстати, мало кто знает, что в детстве Александр мечтал стать футболистом, но судьба распорядилась иначе, подарив миру великого хоккеиста." data-en="Alexander Ovechkin is a name that every hockey fan knows. He is the captain of the Washington Capitals and a true leader on the ice. Over his career, he has won the Stanley Cup, becoming a legend for millions of fans. His playing style combines incredible power and shooting accuracy. Fans adore him not only for his goals but also for his incredible charisma. Ovechkin is a man who changed the idea of modern hockey. By the way, few people know that in childhood Alexander dreamed of becoming a football player, but fate decided otherwise, giving the world a great hockey player.">Александр Овечкин — это имя, которое знает каждый любитель хоккея. Он является капитаном команды «Вашингтон Кэпиталз» и настоящим лидером на льду. За свою карьеру он сумел завоевать Кубок Стэнли, став легендой для миллионов фанатов. Его стиль игры сочетает в себе невероятную мощь и точность броска. Болельщики обожают его не только за голы, но и за невероятную харизму. Овечкин — это человек, который изменил представление о современном хоккее. Кстати, мало кто знает, что в детстве Александр мечтал стать футболистом, но судьба распорядилась иначе, подарив миру великого хоккеиста.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+    <div class="slider-container">
+        <div class="slides" id="slides">
+            <!-- СЛАЙД 1: Титульный -->
+            <div class="slide">
+                <div style="flex:1; display: flex; flex-direction: column; justify-content: center;">
+                    <h1 data-i18n="title"></h1>
+                    <p style="font-size: 1.5rem; margin-top: 24px; color: #ffd966; font-weight: 300;" data-i18n="subtitle"></p>
+                    <div class="accent-block" style="margin-top: 40px;">
+                        <span style="font-size: 1.3rem;" data-i18n="tagline"></span>
+                    </div>
+                    <div class="sign-row" style="margin-top: 50px; justify-content: flex-start; gap: 20px;">
+                        <div class="sign-item">🚶<span data-i18n="pedestrian"></span></div>
+                        <div class="sign-item">🚗<span data-i18n="driver"></span></div>
+                        <div class="sign-item">🚌<span data-i18n="transport"></span></div>
+                    </div>
+                </div>
+            </div>
 
-<section class="page" id="page3">
-  <h2 data-ru="Страница 3 — В деле 🔥" data-en="Page 3 — In Action 🔥">Страница 3 — В деле 🔥</h2>
-  <div class="info-card">
-    <h3 data-ru="На льду" data-en="On the Ice">На льду</h3>
-    <p data-ru="Когда Овечкин выходит на лед, он полностью сосредоточен на игре. Каждое его движение отточено до идеала благодаря годам тренировок. Его мощные броски и умение находить свободные зоны пугают вратарей соперников. Даже его борода выглядит так, будто он готовится к решающему матчу. Он никогда не останавливается на достигнутом и постоянно работает над собой. Именно поэтому он остается одним из лучших игроков своего поколения. Интересно, что его любимый прием — это бросок из левого круга вбрасывания, который вратари просто не успевают отразить." data-en="When Ovechkin steps on the ice, he is completely focused on the game. Every move is refined to perfection thanks to years of training. His powerful shots and ability to find open zones terrify opposing goalies. Even his beard looks like he's preparing for a decisive match. He never rests on his laurels and constantly works on himself. That is why he remains one of the best players of his generation. It is interesting that his favorite move is a shot from the left faceoff circle, which goalies simply do not have time to react to.">Когда Овечкин выходит на лед, он полностью сосредоточен на игре. Каждое его движение отточено до идеала благодаря годам тренировок. Его мощные броски и умение находить свободные зоны пугают вратарей соперников. Даже его борода выглядит так, будто он готовится к решающему матчу. Он никогда не останавливается на достигнутом и постоянно работает над собой. Именно поэтому он остается одним из лучших игроков своего поколения. Интересно, что его любимый прием — это бросок из левого круга вбрасывания, который вратари просто не успевают отразить.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 2 -->
+            <div class="slide">
+                <h2><i>📋</i> <span data-i18n="s2_title"></span></h2>
+                <p data-i18n="s2_intro"></p>
+                <div class="grid-2" style="margin-top: 22px;">
+                    <div class="card">
+                        <span class="card-icon">🚦</span>
+                        <h3 data-i18n="s2_c1_t"></h3>
+                        <p data-i18n="s2_c1_d"></p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">📌</span>
+                        <h3 data-i18n="s2_c2_t"></h3>
+                        <p data-i18n="s2_c2_d"></p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔔</span>
+                        <h3 data-i18n="s2_c3_t"></h3>
+                        <p data-i18n="s2_c3_d"></p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🛣️</span>
+                        <h3 data-i18n="s2_c4_t"></h3>
+                        <p data-i18n="s2_c4_d"></p>
+                    </div>
+                </div>
+            </div>
 
-<section class="page" id="page4">
-  <h2 data-ru="Страница 4 — Статистика 🏒" data-en="Page 4 — Statistics 🏒">Страница 4 — Статистика 🏒</h2>
-  <div class="info-card">
-    <h3 data-ru="Цифры" data-en="The Numbers">Цифры</h3>
-    <p data-ru="Статистика Овечкина впечатляет даже самых искушенных экспертов. На его счету более 800 голов в регулярных чемпионатах НХЛ, что ставит его в один ряд с великими. Он является обладателем множества индивидуальных наград и рекордов лиги. Каждый сезон он продолжает доказывать, что возраст — это всего лишь цифра. Его голы входят в учебники по хоккею и вдохновляют молодых спортсменов. Это настоящая легенда, которая продолжает писать историю прямо на наших глазах. Для сравнения, чтобы забить столько голов, нужно было бы делать по одному точному броску каждый день на протяжении более двух лет без перерывов!" data-en="Ovechkin's statistics impress even the most sophisticated experts. He has over 800 goals in NHL regular seasons, putting him in the same league as the greats. He holds numerous individual awards and league records. Every season he continues to prove that age is just a number. His goals are in hockey textbooks and inspire young athletes. This is a true legend who continues to write history right before our eyes. For comparison, to score that many goals, you would have to make one accurate shot every day for more than two years without breaks!">Статистика Овечкина впечатляет даже самых искушенных экспертов. На его счету более 800 голов в регулярных чемпионатах НХЛ, что ставит его в один ряд с великими. Он является обладателем множества индивидуальных наград и рекордов лиги. Каждый сезон он продолжает доказывать, что возраст — это всего лишь цифра. Его голы входят в учебники по хоккею и вдохновляют молодых спортсменов. Это настоящая легенда, которая продолжает писать историю прямо на наших глазах. Для сравнения, чтобы забить столько голов, нужно было бы делать по одному точному броску каждый день на протяжении более двух лет без перерывов!</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 3 -->
+            <div class="slide">
+                <h2><i>🚘</i> <span data-i18n="s3_title"></span></h2>
+                <ul class="custom-list">
+                    <li data-i18n="s3_l1"></li>
+                    <li data-i18n="s3_l2"></li>
+                    <li data-i18n="s3_l3"></li>
+                    <li data-i18n="s3_l4"></li>
+                    <li data-i18n="s3_l5"></li>
+                    <li data-i18n="s3_l6"></li>
+                </ul>
+                <div class="accent-block" style="margin-top: 24px;" data-i18n-html="s3_warn"></div>
+            </div>
 
-<section class="page" id="page5">
-  <h2 data-ru="Страница 5 — Опыт и мудрость 🧠✨" data-en="Page 5 — Experience & Wisdom 🧠✨">Страница 5 — Опыт и мудрость 🧠✨</h2>
-  <img src="./5.jpg" alt="Овечкин" class="page-img">
-  <div class="info-card">
-    <h3 data-ru="Сезоны за плечами" data-en="Seasons Behind">Сезоны за плечами</h3>
-    <p data-ru="С каждым проведенным сезоном Овечкин становится только мудрее. Он понимает игру на таком уровне, который доступен лишь единицам. Каждая игра и каждый забитый гол добавляют ему уверенности и опыта. Он знает, как побеждать в самых сложных ситуациях и как поддержать команду. Молодые игроки часто обращаются к нему за советом, и он всегда готов помочь. Этот опыт делает его не просто игроком, а настоящим наставником для всей команды. Говорят, что в раздевалке он часто берет на себя роль психолога, подбадривая партнеров после неудач." data-en="With every season, Ovechkin becomes wiser. He understands the game at a level that only a few can reach. Every game and every goal adds to his confidence and experience. He knows how to win in the most difficult situations and how to support the team. Young players often turn to him for advice, and he is always ready to help. This experience makes him not just a player, but a true mentor for the whole team. They say that in the locker room, he often takes on the role of a psychologist, cheering up his teammates after failures.">С каждым проведенным сезоном Овечкин становится только мудрее. Он понимает игру на таком уровне, который доступен лишь единицам. Каждая игра и каждый забитый гол добавляют ему уверенности и опыта. Он знает, как побеждать в самых сложных ситуациях и как поддержать команду. Молодые игроки часто обращаются к нему за советом, и он всегда готов помочь. Этот опыт делает его не просто игроком, а настоящим наставником для всей команды. Говорят, что в раздевалке он часто берет на себя роль психолога, подбадривая партнеров после неудач.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 4 -->
+            <div class="slide">
+                <h2><i>🚶</i> <span data-i18n="s4_title"></span></h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 data-i18n="s4_ped_h"></h3>
+                        <ul>
+                            <li data-i18n="s4_ped_1"></li>
+                            <li data-i18n="s4_ped_2"></li>
+                            <li data-i18n="s4_ped_3"></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="s4_pass_h"></h3>
+                        <ul>
+                            <li data-i18n="s4_pass_1"></li>
+                            <li data-i18n="s4_pass_2"></li>
+                            <li data-i18n="s4_pass_3"></li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 24px; font-size: 1.1rem;" data-i18n-html="s4_note"></p>
+            </div>
 
-<section class="page" id="page6">
-  <h2 data-ru="Страница 6 — Вне льда 🎀" data-en="Page 6 — Off the Ice 🎀">Страница 6 — Вне льда 🎀</h2>
-  <div class="info-card">
-    <h3 data-ru="Улыбка и седина" data-en="Smile and Grey Hair">Улыбка и седина</h3>
-    <p data-ru="Вне льда Овечкин — это невероятно обаятельный и веселый человек. Он умеет быть серьезным на площадке, но за ее пределами всегда готов пошутить. Седина на его висках только добавляет ему шарма и мудрости. Он обожает проводить время с семьей и друзьями, ценя каждое мгновение. Болельщики любят его за то, что он остается настоящим, несмотря на мировую славу. Его улыбка способна растопить лед не хуже, чем его знаменитый бросок. Однажды он признался, что самый большой страх в его жизни — это не проигрыш, а остаться без сладкого на ночь!" data-en="Off the ice, Ovechkin is an incredibly charming and cheerful person. He can be serious on the rink, but outside of it, he is always ready to joke. The grey hair on his temples only adds to his charm and wisdom. He loves spending time with family and friends, cherishing every moment. Fans love him for staying real despite worldwide fame. His smile can melt ice no worse than his famous shot. He once admitted that the biggest fear in his life is not losing, but going to bed without sweets!">Вне льда Овечкин — это невероятно обаятельный и веселый человек. Он умеет быть серьезным на площадке, но за ее пределами всегда готов пошутить. Седина на его висках только добавляет ему шарма и мудрости. Он обожает проводить время с семьей и друзьями, ценя каждое мгновение. Болельщики любят его за то, что он остается настоящим, несмотря на мировую славу. Его улыбка способна растопить лед не хуже, чем его знаменитый бросок. Однажды он признался, что самый большой страх в его жизни — это не проигрыш, а остаться без сладкого на ночь!</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 5 -->
+            <div class="slide">
+                <h2><i>⚡</i> <span data-i18n="s5_title"></span></h2>
+                <div class="grid-3">
+                    <div class="card" style="text-align: center;">
+                        <h3 data-i18n="s5_c1_t"></h3>
+                        <p data-i18n="s5_c1_d"></p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 data-i18n="s5_c2_t"></h3>
+                        <p data-i18n="s5_c2_d"></p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 data-i18n="s5_c3_t"></h3>
+                        <p data-i18n="s5_c3_d"></p>
+                    </div>
+                </div>
+                <ul class="custom-list" style="margin-top: 18px;">
+                    <li data-i18n="s5_l1"></li>
+                    <li data-i18n="s5_l2"></li>
+                    <li data-i18n="s5_l3"></li>
+                </ul>
+                <p style="margin-top: 14px;" data-i18n-html="s5_note"></p>
+            </div>
 
-<section class="page" id="page7">
-  <h2 data-ru="Страница 7 — Рекорды 🏆" data-en="Page 7 — Records 🏆">Страница 7 — Рекорды 🏆</h2>
-  <div class="info-card">
-    <h3 data-ru="Голевая машина" data-en="Goal Machine">Голевая машина</h3>
-    <p data-ru="Овечкина часто называют настоящей голевой машиной, и это вполне оправдано. Он способен забивать из любых позиций, будь то мощный щелчок или точный кистевой бросок. Его имя уже вписано золотыми буквами в историю Национальной хоккейной лиги. Он побил множество рекордов, которые раньше казались вечными. Каждый его гол — это результат огромного труда и таланта. И он не собирается останавливаться на достигнутом, продолжая удивлять нас. Примечательно, что свой первый гол в НХЛ он забил в первом же матче, мгновенно заявив о себе на весь мир." data-en="Ovechkin is often called a real goal machine, and rightly so. He can score from any position, whether it's a powerful slap shot or an accurate wrist shot. His name is already written in golden letters in the history of the National Hockey League. He has broken many records that previously seemed eternal. Each of his goals is the result of hard work and talent. And he is not going to stop there, continuing to amaze us. It is noteworthy that he scored his first NHL goal in his very first game, instantly announcing himself to the whole world.">Овечкина часто называют настоящей голевой машиной, и это вполне оправдано. Он способен забивать из любых позиций, будь то мощный щелчок или точный кистевой бросок. Его имя уже вписано золотыми буквами в историю Национальной хоккейной лиги. Он побил множество рекордов, которые раньше казались вечными. Каждый его гол — это результат огромного труда и таланта. И он не собирается останавливаться на достигнутом, продолжая удивлять нас. Примечательно, что свой первый гол в НХЛ он забил в первом же матче, мгновенно заявив о себе на весь мир.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 6 -->
+            <div class="slide">
+                <h2><i>🛑</i> <span data-i18n="s6_title"></span></h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 data-i18n="s6_c1_t"></h3>
+                        <p data-i18n="s6_c1_d"></p>
+                        <div style="font-size: 2rem; margin-top: 10px;">⚠️ 🚸 🛣️</div>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="s6_c2_t"></h3>
+                        <p data-i18n="s6_c2_d"></p>
+                        <div style="font-size: 2rem; margin-top: 10px;">⛔ 🚫 🚷</div>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="s6_c3_t"></h3>
+                        <p data-i18n="s6_c3_d"></p>
+                        <div style="font-size: 2rem; margin-top: 10px;">➡️ ⬆️ ⬇️</div>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="s6_c4_t"></h3>
+                        <p data-i18n="s6_c4_d"></p>
+                        <div style="font-size: 2rem; margin-top: 10px;">ℹ️ 🅿️ 🏁</div>
+                    </div>
+                </div>
+            </div>
 
-<section class="page" id="page8">
-  <h2 data-ru="Страница 8 — Лидерство 💪" data-en="Page 8 — Leadership 💪">Страница 8 — Лидерство 💪</h2>
-  <div class="info-card">
-    <h3 data-ru="Капитан" data-en="Captain">Капитан</h3>
-    <p data-ru="Буква «C» на его свитере означает не просто звание, а огромную ответственность. Овечкин ведет свою команду за собой как на льду, так и в раздевалке. Он всегда готов поддержать партнеров в трудную минуту и дать им уверенность. Его лидерские качества проявляются в самых ответственных матчах. Он не боится брать на себя игру и решать исход встречи. Именно благодаря этому он стал настоящим символом и капитаном «Вашингтон Кэпиталз». Ходят слухи, что перед важными играми он произносит такие речи, которые заставляют мурашки бежать по коже даже у самых опытных игроков." data-en="The letter 'C' on his sweater means not just a title, but huge responsibility. Ovechkin leads his team both on the ice and in the locker room. He is always ready to support his teammates in difficult times and give them confidence. His leadership qualities show in the most crucial matches. He is not afraid to take the game upon himself and decide the outcome of the match. That is why he has become a true symbol and captain of the Washington Capitals. There are rumors that before important games, he gives speeches that give goosebumps even to the most experienced players.">Буква «C» на его свитере означает не просто звание, а огромную ответственность. Овечкин ведет свою команду за собой как на льду, так и в раздевалке. Он всегда готов поддержать партнеров в трудную минуту и дать им уверенность. Его лидерские качества проявляются в самых ответственных матчах. Он не боится брать на себя игру и решать исход встречи. Именно благодаря этому он стал настоящим символом и капитаном «Вашингтон Кэпиталз». Ходят слухи, что перед важными играми он произносит такие речи, которые заставляют мурашки бежать по коже даже у самых опытных игроков.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 7 -->
+            <div class="slide">
+                <h2><i>🏫</i> <span data-i18n="s7_title"></span></h2>
+                <ul class="custom-list">
+                    <li data-i18n-html="s7_l1"></li>
+                    <li data-i18n-html="s7_l2"></li>
+                    <li data-i18n-html="s7_l3"></li>
+                    <li data-i18n-html="s7_l4"></li>
+                    <li data-i18n-html="s7_l5"></li>
+                </ul>
+                <div class="accent-block" style="margin-top: 18px;" data-i18n="s7_note"></div>
+            </div>
 
-<section class="page" id="page9">
-  <h2 data-ru="Страница 9 — Стиль 🎀" data-en="Page 9 — Style 🎀">Страница 9 — Стиль 🎀</h2>
-  <div class="info-card">
-    <h3 data-ru="Джерси и борода" data-en="Jersey and Beard">Джерси и борода</h3>
-    <p data-ru="У Овечкина есть свой уникальный стиль, который узнают во всем мире. Красная, белая или черная джерси — ему идет абсолютно все. Но главной фишкой его образа стала густая борода, которая придает ему брутальности. Многие фанаты пытаются копировать его стиль, но повторить это невозможно. Он всегда выглядит уверенно и стильно, независимо от ситуации. Его образ стал настоящим брендом, который ассоциируется с победами и силой. Кстати, его борода даже стала героем множества интернет-мемов, где ее сравнивают с супергеройской броней." data-en="Ovechkin has his own unique style that is recognized all over the world. Red, white, or black jersey — absolutely everything suits him. But the main feature of his image is a thick beard that gives him brutality. Many fans try to copy his style, but it's impossible to replicate. He always looks confident and stylish, regardless of the situation. His image has become a true brand associated with victories and strength. By the way, his beard has even become the hero of many internet memes, where it is compared to superhero armor.">У Овечкина есть свой уникальный стиль, который узнают во всем мире. Красная, белая или черная джерси — ему идет абсолютно все. Но главной фишкой его образа стала густая борода, которая придает ему брутальности. Многие фанаты пытаются копировать его стиль, но повторить это невозможно. Он всегда выглядит уверенно и стильно, независимо от ситуации. Его образ стал настоящим брендом, который ассоциируется с победами и силой. Кстати, его борода даже стала героем множества интернет-мемов, где ее сравнивают с супергеройской броней.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
+            <!-- СЛАЙД 8 -->
+            <div class="slide">
+                <h2><i>⚖️</i> <span data-i18n="s8_title"></span></h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 data-i18n="s8_c1_t"></h3>
+                        <ul>
+                            <li data-i18n="s8_c1_1"></li>
+                            <li data-i18n="s8_c1_2"></li>
+                            <li data-i18n="s8_c1_3"></li>
+                            <li data-i18n="s8_c1_4"></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="s8_c2_t"></h3>
+                        <ul>
+                            <li data-i18n="s8_c2_1"></li>
+                            <li data-i18n="s8_c2_2"></li>
+                            <li data-i18n="s8_c2_3"></li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.05rem;" data-i18n="s8_note"></p>
+            </div>
 
-<section class="page" id="page10">
-  <h2 data-ru="Страница 10 — Фанаты 💖" data-en="Page 10 — Fans 💖">Страница 10 — Фанаты 💖</h2>
-  <div class="info-card">
-    <h3 data-ru="Любовь болельщиков" data-en="Fan Love">Любовь болельщиков</h3>
-    <p data-ru="Овечкин пользуется невероятной популярностью среди болельщиков по всему миру. Его обожают за характер, искрометный юмор и преданность игре. Фанаты часто ждут его у выхода со стадиона, чтобы получить автограф или сделать фото. Он никогда не отказывает в общении и всегда находит время для своих поклонников. Эта взаимная любовь длится уже много лет и с каждым годом только крепнет. Однажды он подарил свою клюшку маленькому мальчику, который был настолько счастлив, что не мог сдержать слез." data-en="Ovechkin is incredibly popular among fans all over the world. They adore him for his character, sparkling humor, and dedication to the game. Fans often wait for him at the stadium exit to get an autograph or take a photo. He never refuses to communicate and always finds time for his fans. This mutual love has lasted for many years and only grows stronger every year. Once he gave his stick to a little boy who was so happy that he couldn't hold back tears.">Овечкин пользуется невероятной популярностью среди болельщиков по всему миру. Его обожают за характер, искрометный юмор и преданность игре. Фанаты часто ждут его у выхода со стадиона, чтобы получить автограф или сделать фото. Он никогда не отказывает в общении и всегда находит время для своих поклонников. Эта взаимная любовь длится уже много лет и с каждым годом только крепнет. Однажды он подарил свою клюшку маленькому мальчику, который был настолько счастлив, что не мог сдержать слез.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
-
-<section class="page" id="page11">
-  <h2 data-ru="Страница 11 — Наследие ✨" data-en="Page 11 — Legacy ✨">Страница 11 — Наследие ✨</h2>
-  <div class="info-card">
-    <h3 data-ru="Легенда" data-en="Legend">Легенда</h3>
-    <p data-ru="Александр Овечкин уже давно вошел в историю мирового хоккея как один из величайших игроков. Его имя будет жить в памяти поколений еще очень долго. Он вдохновил тысячи молодых ребят по всему миру начать заниматься этим видом спорта. Его карьера — это пример невероятного трудолюбия и целеустремленности. Каждый матч с его участием становится настоящим событием для болельщиков. Можно с уверенностью сказать, что наследие Овечкина будет жить вечно, как и его легендарные голы." data-en="Alexander Ovechkin has long entered the history of world hockey as one of the greatest players. His name will live in the memory of generations for a very long time. He has inspired thousands of young guys around the world to take up this sport. His career is an example of incredible hard work and dedication. Every match with his participation becomes a real event for the fans. We can say with confidence that Ovechkin's legacy will live forever, just like his legendary goals.">Александр Овечкин уже давно вошел в историю мирового хоккея как один из величайших игроков. Его имя будет жить в памяти поколений еще очень долго. Он вдохновил тысячи молодых ребят по всему миру начать заниматься этим видом спорта. Его карьера — это пример невероятного трудолюбия и целеустремленности. Каждый матч с его участием становится настоящим событием для болельщиков. Можно с уверенностью сказать, что наследие Овечкина будет жить вечно, как и его легендарные голы.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
-
-<section class="page" id="page12">
-  <h2 data-ru="Страница 12 — Характер 🔥" data-en="Page 12 — Character 🔥">Страница 12 — Характер 🔥</h2>
-  <div class="info-card">
-    <h3 data-ru="Боевой дух" data-en="Fighting Spirit">Боевой дух</h3>
-    <p data-ru="Овечкин никогда не сдается, даже когда дела идут не лучшим образом. Его боевой дух и страсть к игре передаются всей команде. Он способен завести партнеров одним лишь взглядом или громким криком на льду. Его эмоциональность делает хоккей еще более зрелищным и захватывающим. В каждой игре он выкладывается на сто процентов, не жалея себя. Именно этот характер и сделал его тем, кем он является сегодня — настоящей легендой." data-en="Ovechkin never gives up, even when things are not going well. His fighting spirit and passion for the game are transmitted to the whole team. He can fire up his teammates with just a look or a loud shout on the ice. His emotionality makes hockey even more spectacular and exciting. In every game, he gives one hundred percent, not sparing himself. It is this character that made him who he is today — a true legend.">Овечкин никогда не сдается, даже когда дела идут не лучшим образом. Его боевой дух и страсть к игре передаются всей команде. Он способен завести партнеров одним лишь взглядом или громким криком на льду. Его эмоциональность делает хоккей еще более зрелищным и захватывающим. В каждой игре он выкладывается на сто процентов, не жалея себя. Именно этот характер и сделал его тем, кем он является сегодня — настоящей легендой.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
-
-<section class="page" id="page13">
-  <h2 data-ru="Страница 13 — Влияние 🌍" data-en="Page 13 — Influence 🌍">Страница 13 — Влияние 🌍</h2>
-  <div class="info-card">
-    <h3 data-ru="Мировая звезда" data-en="Global Star">Мировая звезда</h3>
-    <p data-ru="Влияние Овечкина выходит далеко за пределы хоккейной площадки. Его знают и любят не только в России и США, но и во многих других странах. Он является лицом нескольких крупных мировых брендов и участвует в благотворительных проектах. Его имя привлекает внимание к хоккею и помогает популяризировать этот спорт среди молодежи. Он настоящий посол хоккея во всем мире. Благодаря ему тысячи детей мечтают однажды выйти на лед и повторить его успех." data-en="Ovechkin's influence goes far beyond the hockey rink. He is known and loved not only in Russia and the USA but also in many other countries. He is the face of several major global brands and participates in charity projects. His name draws attention to hockey and helps popularize this sport among young people. He is a true ambassador of hockey around the world. Thanks to him, thousands of children dream of one day stepping on the ice and repeating his success.">Влияние Овечкина выходит далеко за пределы хоккейной площадки. Его знают и любят не только в России и США, но и во многих других странах. Он является лицом нескольких крупных мировых брендов и участвует в благотворительных проектах. Его имя привлекает внимание к хоккею и помогает популяризировать этот спорт среди молодежи. Он настоящий посол хоккея во всем мире. Благодаря ему тысячи детей мечтают однажды выйти на лед и повторить его успех.</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
-
-<section class="page" id="page14">
-  <div class="final-banner">
-    <h2 data-ru="🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥" data-en="🔥 DOWNLOAD MAX OR PEPE WILL BE SAD 🔥">🔥 СКАЧАЙТЕ МАКС А НЕ ТО ПЕПЕ ШНЕЙНЕ БУДЕТ ЗОЛ 🔥</h2>
-    <p data-ru="Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒" data-en="Otherwise Alexander Ovechkin will get upset and won't score in the next game 😢🏒">Иначе Александр Овечкин расстроится и не забьёт в следующем матче 😢🏒</p>
-    <p style="margin-top:10px; font-size:16px;" data-ru="МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙" data-en="MAX — TOP, PEPE — SHINE, GOLD — TO ALL! 💛🤍💙">МАКС — ТОП, ПЕПЕ — ШНЕЙН, ЗОЛОТО — ВСЕМ! 💛🤍💙</p>
-    <p style="margin-top:10px; font-size:15px;" data-ru="Скачивай Макс, ставь лайки и следи за новостями хоккея! Вместе мы сделаем этот мир лучше, а хоккей — еще популярнее. Помни: твоя поддержка очень важна для нас!" data-en="Download Max, like, and follow hockey news! Together we will make this world a better place, and hockey even more popular. Remember: your support is very important to us!">Скачивай Макс, ставь лайки и следи за новостями хоккея! Вместе мы сделаем этот мир лучше, а хоккей — еще популярнее. Помни: твоя поддержка очень важна для нас!</p>
-    <a href="https://max.ru" target="_blank" class="download-btn" data-ru="СКАЧАТЬ МАКС 💅" data-en="DOWNLOAD MAX 💅">СКАЧАТЬ МАКС 💅</a>
-    <p class="nyan" style="text-align:center; margin-top:15px; color:#fff;">ня</p>
-  </div>
-</section>
-
-<section class="page" id="page15">
-  <h2 data-ru="✨ Создатель сайта ✨" data-en="✨ Website Creator ✨">✨ Создатель сайта ✨</h2>
-  <h3 style="font-family: 'Pacifico', cursive; color: #ff69b4; font-size: 28px; margin-top: 10px; margin-bottom: 20px; text-align: center;" data-ru="Тимур Магдеев" data-en="Timur Magdeev">Тимур Магдеев</h3>
-  <div class="cat-wrapper">
-    <img src="./cat.png" alt="Кот Миша" class="cat-img">
-    <div class="arrow-container">
-      <div class="arrow-line">↑</div>
-      <div class="arrow-text" data-ru="Миша" data-en="Misha">Миша</div>
+            <!-- СЛАЙД 9 -->
+            <div class="slide">
+                <div style="flex:1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+                    <h2 style="font-size: 2.4rem; margin-bottom: 12px;" data-i18n="s9_title"></h2>
+                    <p style="font-size: 1.4rem; max-width: 80%;" data-i18n="s9_text"></p>
+                    <div class="accent-block" style="width: 100%; margin-top: 30px;">
+                        <span style="font-size: 1.5rem;" data-i18n="s9_accent"></span>
+                    </div>
+                    <div style="display: flex; gap: 30px; margin-top: 40px; font-size: 3rem;">
+                        <span>🚗</span> <span>🚶</span> <span>🚴</span> <span>🚌</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="info-card" style="text-align: center;">
-    <p data-ru="Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒 Этот проект создавался с огромной любовью и вниманием к деталям. Хотелось передать всю ту атмосферу праздника и восхищения, которую вызывает игра Александра Овечкина. Надеюсь, вам понравилось!" data-en="Made this site with sparkles and respect for the legend. 🎀🏒 This project was created with great love and attention to detail. I wanted to convey all the atmosphere of celebration and admiration that Alexander Ovechkin's game evokes. I hope you liked it!">Сделал этот сайт с блёстками и уважением к легенде. 🎀🏒 Этот проект создавался с огромной любовью и вниманием к деталям. Хотелось передать всю ту атмосферу праздника и восхищения, которую вызывает игра Александра Овечкина. Надеюсь, вам понравилось!</p>
-    <span class="nyan" style="text-align: center;">ня</span>
-  </div>
-</section>
 
-<section class="page" id="page16">
-  <h2 data-ru="Страница 16 — Мамонт и Бегемот 🐘🦛" data-en="Page 16 — Mammoth & Hippo 🐘🦛">Страница 16 — Мамонт и Бегемот 🐘🦛</h2>
-  <img src="./mammoth.jpg" alt="Мамонт Данила и бегемот Мирослав" class="page-img" style="max-height: 55vh;">
-  <div class="info-card" style="text-align: center;">
-    <h3 data-ru="Данила и Мирослав" data-en="Danila and Miroslav">Данила и Мирослав</h3>
-    <p data-ru="Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе, демонстрируя невероятную дружбу и взаимопонимание. Эта картина напоминает нам о том, что даже самые разные существа могут найти общий язык. Возможно, они тоже болеют за Овечкина и мечтают однажды попасть на хоккейный матч! ❄️🐘🦛" data-en="True legends of the north! Mammoth Danila stands proudly on hippo Miroslav, demonstrating incredible friendship and mutual understanding. This picture reminds us that even the most different creatures can find a common language. Perhaps they also root for Ovechkin and dream of one day attending a hockey match! ❄️🐘🦛">Настоящие легенды севера! Мамонт Данила гордо стоит на бегемоте Мирославе, демонстрируя невероятную дружбу и взаимопонимание. Эта картина напоминает нам о том, что даже самые разные существа могут найти общий язык. Возможно, они тоже болеют за Овечкина и мечтают однажды попасть на хоккейный матч! ❄️🐘🦛</p>
-    <span class="nyan">ня</span>
-  </div>
-</section>
-
-<footer data-ru="Создатель: Тимур Магдеев | ня" data-en="Creator: Timur Magdeev | nya">Создатель: Тимур Магдеев | ня</footer>
-
-<div class="nyan-container">
-  <div class="nyan-trail"></div>
-  <img src="./nyan.gif" alt="Нян-кет" class="nyan-img">
-</div>
-
-<div class="easter-egg" id="easterEgg" onclick="closeEasterEgg()">
-  <img src="./snow_leopard.jpg" alt="Снежный барс">
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
+        <div class="dots" id="dotsContainer"></div>
+        <span class="slide-counter" id="counter">1 / 9</span>
+        <button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
+    </div>
+    <div class="footer-note" id="footerNote"></div>
 </div>
 
 <script>
-  let currentLang = 'ru';
-  let clickCount = 0;
-  let clickTimer;
+(function() {
+    /* ======================= СЛОВАРИ ПЕРЕВОДОВ ======================= */
+    const translations = {
+        ru: {
+            title: "Правила дорожного<br>движения в России",
+            subtitle: "Основные положения и обязанности участников",
+            tagline: "🚦 Безопасность на дороге — ответственность каждого",
+            pedestrian: "Пешеход",
+            driver: "Водитель",
+            transport: "Транспорт",
 
-  function handleLangClick() {
-    clickCount++;
-    clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            s2_title: "Что регулируют ПДД?",
+            s2_intro: "Правила дорожного движения РФ (утверждены Постановлением Правительства №1090 от 23.10.1993) устанавливают единый порядок дорожного движения на всей территории страны.",
+            s2_c1_t: "Приоритет",
+            s2_c1_d: "Очерёдность проезда перекрёстков, регулируемых и нерегулируемых.",
+            s2_c2_t: "Обязанности",
+            s2_c2_d: "Водителей, пешеходов, пассажиров и велосипедистов.",
+            s2_c3_t: "Сигналы",
+            s2_c3_d: "Светофоры, регулировщик, специальные сигналы.",
+            s2_c4_t: "Дорожные знаки",
+            s2_c4_d: "Предупреждающие, запрещающие, предписывающие, информационные.",
 
-    if (clickCount >= 5) {
-      document.getElementById('easterEgg').style.display = 'flex';
-      clickCount = 0;
-      return;
+            s3_title: "Обязанности водителя",
+            s3_l1: "Иметь при себе водительское удостоверение, СТС и страховой полис ОСАГО.",
+            s3_l2: "Перед выездом проверить техническое состояние автомобиля.",
+            s3_l3: "Быть пристёгнутым и не перевозить непристёгнутых пассажиров.",
+            s3_l4: "Соблюдать скоростной режим и дистанцию.",
+            s3_l5: "Уступать дорогу пешеходам на переходах.",
+            s3_l6: "Не управлять ТС в состоянии опьянения (алкогольного, наркотического).",
+            s3_warn: '⚠️ Управление в состоянии опьянения — штраф <span class="highlight">45 000 ₽</span> и лишение прав на 1,5–2 года.',
+
+            s4_title: "Пешеходы и пассажиры",
+            s4_ped_h: "Пешеходы обязаны:",
+            s4_ped_1: "Переходить дорогу по переходам и на зелёный сигнал светофора.",
+            s4_ped_2: "Вне населённых пунктов двигаться по обочине навстречу транспорту.",
+            s4_ped_3: "В тёмное время суток использовать световозвращающие элементы.",
+            s4_pass_h: "Пассажиры обязаны:",
+            s4_pass_1: "Пристёгиваться ремнями безопасности.",
+            s4_pass_2: "Посадка/высадка — со стороны тротуара или обочины.",
+            s4_pass_3: "Не отвлекать водителя во время движения.",
+            s4_note: '<span class="highlight">Важно:</span> пешеходы должны убедиться в безопасности перехода, даже на зелёный сигнал.',
+
+            s5_title: "Скоростной режим",
+            s5_c1_t: "60 км/ч",
+            s5_c1_d: "В населённых пунктах",
+            s5_c2_t: "90 км/ч",
+            s5_c2_d: "Вне населённых пунктов",
+            s5_c3_t: "110 км/ч",
+            s5_c3_d: "На автомагистралях",
+            s5_l1: "В жилых зонах — не более 20 км/ч.",
+            s5_l2: "При буксировке — не более 50 км/ч.",
+            s5_l3: "При перевозке детей до 7 лет — не более 60 км/ч (с учётом ограничений).",
+            s5_note: 'Штраф за превышение скорости на 20–40 км/ч — <span class="highlight">500 ₽</span>; на 40–60 км/ч — 1000–1500 ₽.',
+
+            s6_title: "Дорожные знаки",
+            s6_c1_t: "Предупреждающие",
+            s6_c1_d: "Треугольные с красной каймой — предупреждают об опасности.",
+            s6_c2_t: "Запрещающие",
+            s6_c2_d: "Круглые с красной каймой — вводят ограничения.",
+            s6_c3_t: "Предписывающие",
+            s6_c3_d: "Синие круглые — указывают направление или режим движения.",
+            s6_c4_t: "Информационные",
+            s6_c4_d: "Синие/зелёные прямоугольники — информируют о маршрутах и объектах.",
+
+            s7_title: "Особые участки и перекрёстки",
+            s7_l1: '<span class="highlight">Пешеходный переход</span> — водитель обязан уступить дорогу пешеходам, вступившим на проезжую часть.',
+            s7_l2: '<span class="highlight">Перекрёсток</span> — при повороте направо/налево уступить дорогу пешеходам, переходящим проезжую часть.',
+            s7_l3: '<span class="highlight">Железнодорожный переезд</span> — остановка запрещена ближе 5 м до шлагбаума; движение задним ходом запрещено.',
+            s7_l4: '<span class="highlight">Жилая зона</span> — пешеходы имеют приоритет, скорость не более 20 км/ч.',
+            s7_l5: '<span class="highlight">Автобусные остановки</span> — остановка и стоянка запрещены ближе 15 м.',
+            s7_note: "🚸 Вблизи школ и детских садов — повышенная осторожность и ограничение скорости.",
+
+            s8_title: "Ответственность за нарушения",
+            s8_c1_t: "Штрафы (КоАП РФ)",
+            s8_c1_1: "Проезд на красный свет — 1000 ₽",
+            s8_c1_2: "Непристёгнутый ремень — 1000 ₽",
+            s8_c1_3: "Телефон за рулём — 1500 ₽",
+            s8_c1_4: "Нет ОСАГО — 800 ₽",
+            s8_c2_t: "Серьёзные нарушения",
+            s8_c2_1: "Пьяное вождение — до 45 000 ₽ + лишение прав",
+            s8_c2_2: "Превышение скорости >60 км/ч — до 5000 ₽ или лишение",
+            s8_c2_3: "Выезд на встречную полосу — 5000 ₽ или лишение до 6 мес.",
+            s8_note: "С 2025 года усиливается контроль за использованием телефонов и непристёгнутыми ремнями.",
+
+            s9_title: "Соблюдайте ПДД!",
+            s9_text: "Правила дорожного движения — это не формальность, а гарантия безопасности вашей и окружающих.",
+            s9_accent: "🛑 Внимание, уважение и ответственность — залог безопасных дорог России.",
+
+            footer: "Презентация «Правила дорожного движения в России»"
+        },
+
+        en: {
+            title: "Road Traffic Rules<br>in Russia",
+            subtitle: "Key provisions and responsibilities of road users",
+            tagline: "🚦 Road safety is everyone's responsibility",
+            pedestrian: "Pedestrian",
+            driver: "Driver",
+            transport: "Transport",
+
+            s2_title: "What do traffic rules regulate?",
+            s2_intro: "The Road Traffic Rules of the Russian Federation (approved by Government Decree No. 1090 of 23.10.1993) establish a unified traffic order throughout the country.",
+            s2_c1_t: "Priority",
+            s2_c1_d: "Order of passing regulated and unregulated intersections.",
+            s2_c2_t: "Responsibilities",
+            s2_c2_d: "Of drivers, pedestrians, passengers and cyclists.",
+            s2_c3_t: "Signals",
+            s2_c3_d: "Traffic lights, traffic controller, special signals.",
+            s2_c4_t: "Road signs",
+            s2_c4_d: "Warning, prohibitory, mandatory, information signs.",
+
+            s3_title: "Driver's responsibilities",
+            s3_l1: "Carry a driving licence, vehicle registration certificate and OSAGO insurance policy.",
+            s3_l2: "Check the technical condition of the vehicle before departure.",
+            s3_l3: "Wear a seat belt and do not carry unbelted passengers.",
+            s3_l4: "Observe the speed limit and safe following distance.",
+            s3_l5: "Give way to pedestrians at crossings.",
+            s3_l6: "Never drive under the influence of alcohol or drugs.",
+            s3_warn: '⚠️ Drunk driving — fine of <span class="highlight">45,000 ₽</span> and licence suspension for 1.5–2 years.',
+
+            s4_title: "Pedestrians and passengers",
+            s4_ped_h: "Pedestrians must:",
+            s4_ped_1: "Cross the road at crossings and on a green light.",
+            s4_ped_2: "Outside built-up areas walk along the shoulder facing oncoming traffic.",
+            s4_ped_3: "Use reflective elements in the dark.",
+            s4_pass_h: "Passengers must:",
+            s4_pass_1: "Wear seat belts.",
+            s4_pass_2: "Get in and out on the side of the pavement or shoulder.",
+            s4_pass_3: "Not distract the driver while the vehicle is moving.",
+            s4_note: '<span class="highlight">Important:</span> pedestrians must make sure the crossing is safe, even on a green light.',
+
+            s5_title: "Speed limits",
+            s5_c1_t: "60 km/h",
+            s5_c1_d: "In built-up areas",
+            s5_c2_t: "90 km/h",
+            s5_c2_d: "Outside built-up areas",
+            s5_c3_t: "110 km/h",
+            s5_c3_d: "On motorways",
+            s5_l1: "In residential zones — no more than 20 km/h.",
+            s5_l2: "When towing — no more than 50 km/h.",
+            s5_l3: "When carrying children under 7 — no more than 60 km/h (subject to restrictions).",
+            s5_note: 'Fine for speeding by 20–40 km/h — <span class="highlight">500 ₽</span>; by 40–60 km/h — 1,000–1,500 ₽.',
+
+            s6_title: "Road signs",
+            s6_c1_t: "Warning signs",
+            s6_c1_d: "Triangular with a red border — warn of danger.",
+            s6_c2_t: "Prohibitory signs",
+            s6_c2_d: "Round with a red border — impose restrictions.",
+            s6_c3_t: "Mandatory signs",
+            s6_c3_d: "Blue round signs — indicate direction or traffic mode.",
+            s6_c4_t: "Information signs",
+            s6_c4_d: "Blue/green rectangles — inform about routes and facilities.",
+
+            s7_title: "Special areas and intersections",
+            s7_l1: '<span class="highlight">Pedestrian crossing</span> — the driver must give way to pedestrians who have entered the roadway.',
+            s7_l2: '<span class="highlight">Intersection</span> — when turning right/left, give way to pedestrians crossing the roadway.',
+            s7_l3: '<span class="highlight">Railway crossing</span> — stopping is prohibited within 5 m of the barrier; reversing is prohibited.',
+            s7_l4: '<span class="highlight">Residential zone</span> — pedestrians have priority, speed no more than 20 km/h.',
+            s7_l5: '<span class="highlight">Bus stops</span> — stopping and parking are prohibited within 15 m.',
+            s7_note: "🚸 Near schools and kindergartens — extra caution and reduced speed.",
+
+            s8_title: "Liability for violations",
+            s8_c1_t: "Fines (Administrative Code)",
+            s8_c1_1: "Running a red light — 1,000 ₽",
+            s8_c1_2: "Unfastened seat belt — 1,000 ₽",
+            s8_c1_3: "Using a phone while driving — 1,500 ₽",
+            s8_c1_4: "No OSAGO insurance — 800 ₽",
+            s8_c2_t: "Serious violations",
+            s8_c2_1: "Drunk driving — up to 45,000 ₽ + licence suspension",
+            s8_c2_2: "Speeding >60 km/h — up to 5,000 ₽ or licence suspension",
+            s8_c2_3: "Driving into oncoming lane — 5,000 ₽ or suspension up to 6 months.",
+            s8_note: "From 2025, control over phone use and unfastened seat belts is being tightened.",
+
+            s9_title: "Follow the traffic rules!",
+            s9_text: "Traffic rules are not a formality — they guarantee your safety and the safety of others.",
+            s9_accent: "🛑 Attention, respect and responsibility are the key to safe roads in Russia.",
+
+            footer: "Presentation: Road Traffic Rules in Russia"
+        }
+    };
+
+    /* ======================= ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА ======================= */
+    let currentLang = 'ru';
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        const dict = translations[lang];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) {
+                el.innerHTML = dict[key];
+            }
+        });
+
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (dict[key] !== undefined) {
+                el.innerHTML = dict[key];
+            }
+        });
+
+        document.getElementById('footerNote').textContent = dict.footer || '';
+
+        // Обновить активную кнопку языка
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Обновить атрибут lang документа
+        document.documentElement.lang = lang;
+
+        // Обновить заголовок страницы
+        document.title = lang === 'ru'
+            ? 'Правила дорожного движения в России'
+            : 'Road Traffic Rules in Russia';
     }
 
-    currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    document.getElementById('langBtn').textContent = currentLang === 'ru' ? '🇷🇺 RU' : '🇬🇧 EN';
-    
-    document.querySelectorAll('[data-ru]').forEach(el => {
-      el.textContent = el.getAttribute('data-' + currentLang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyLanguage(btn.dataset.lang);
+        });
     });
-  }
 
-  function closeEasterEgg() {
-    document.getElementById('easterEgg').style.display = 'none';
-  }
+    /* ======================= СЛАЙДЕР ======================= */
+    const slidesContainer = document.getElementById('slides');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const counter = document.getElementById('counter');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
 
-  const track = document.getElementById('track');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dotsContainer = document.getElementById('dots');
-  let currentIndex = 0;
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('active');
-    dot.onclick = () => goToSlide(i);
-    dotsContainer.appendChild(dot);
-  });
-  const dots = document.querySelectorAll('.dot');
+    function updateUI() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+        counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+    }
 
-  function updateCarousel() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-  }
-  function moveSlide(dir) {
-    currentIndex = (currentIndex + dir + slides.length) % slides.length;
-    updateCarousel();
-  }
-  function goToSlide(i) {
-    currentIndex = i;
-    updateCarousel();
-  }
-  setInterval(() => moveSlide(1), 5000);
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        if (index === currentIndex) return;
 
-  let startX = 0;
-  track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-  track.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) moveSlide(diff > 0 ? 1 : -1);
-  });
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateUI();
+    }
 
-  const pages = document.querySelectorAll('.page');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+    function nextSlide() {
+        if (currentIndex < totalSlides - 1) goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) goToSlide(currentIndex - 1);
+    }
+
+    createDots();
+    updateUI();
+
+    // Применить язык по умолчанию
+    applyLanguage('ru');
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
     });
-  }, { threshold: 0.15 });
-  pages.forEach(p => observer.observe(p));
 
-  const navLinks = document.querySelectorAll('.page-nav a');
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-      }
-    });
-  }, { threshold: 0.5 });
-  pages.forEach(p => navObserver.observe(p));
+    // Свайпы
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slidesContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slidesContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    }, { passive: true });
+
+    slidesContainer.style.transform = 'translateX(0)';
+})();
 </script>
 </body>
 </html>
