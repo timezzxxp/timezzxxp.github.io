@@ -419,7 +419,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.6);
         }
 
-        /* Стили для финального слайда с котом */
+        /* Стили для финального слайда с чиби-персонажем */
         .misha-container {
             display: flex;
             flex-direction: column;
@@ -429,21 +429,22 @@
             position: relative;
         }
 
-        /* Анимация кота */
+        /* Анимация чиби-персонажа — недовольное покачивание */
         .cat-misha {
-            max-width: 220px;
-            max-height: 220px;
+            max-width: 280px;
+            max-height: 280px;
             object-fit: contain;
-            animation: breatheAndWiggle 2.5s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(255, 105, 180, 0.4));
+            animation: annoyedWiggle 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.5));
             z-index: 2;
         }
 
-        @keyframes breatheAndWiggle {
+        @keyframes annoyedWiggle {
             0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.05) rotate(-3deg); }
-            50% { transform: scale(1.02) rotate(0deg); }
-            75% { transform: scale(1.05) rotate(3deg); }
+            20% { transform: scale(1.04) rotate(-4deg); }
+            40% { transform: scale(1.02) rotate(0deg); }
+            60% { transform: scale(1.04) rotate(4deg); }
+            80% { transform: scale(1.01) rotate(-2deg); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
@@ -475,6 +476,14 @@
             letter-spacing: 4px;
         }
 
+        .misha-sublabel {
+            font-size: 1.1rem;
+            color: #d9c4d6;
+            margin-top: 6px;
+            font-style: italic;
+            opacity: 0.85;
+        }
+
         @media (max-width: 760px) {
             .slide { padding: 30px 20px 38px; min-height: 550px; }
             .slide h1 { font-size: 2rem; }
@@ -489,7 +498,7 @@
             .chibi-corner { font-size: 2rem; bottom: 10px; right: 14px; }
             .full-image { max-height: 250px; }
             .arrow-pointing { font-size: 3.5rem; margin-right: -40px; }
-            .cat-misha { max-width: 160px; }
+            .cat-misha { max-width: 200px; max-height: 200px; }
             .misha-label { font-size: 1.8rem; }
         }
     </style>
@@ -709,27 +718,27 @@
                 <div class="chibi-corner">(⁄ ⁄•⁄ω⁄•⁄ ⁄)</div>
             </div>
 
-            <!-- НОВЫЙ СЛАЙД 10: Мамонт и бегемот (по центру) -->
+            <!-- СЛАЙД 10: Мамонт и бегемот (по центру) -->
             <div class="slide" style="justify-content: center; text-align: center;">
                 <h2 style="justify-content: center; margin-bottom: 10px;">🦣 Данила и Мирослав 🦛</h2>
                 <div class="image-container">
-                    <!-- Файл должен называться mammoth.jpg и лежать рядом с index.html -->
                     <img src="mammoth.jpg" alt="Мамонт Данила на бегемоте Мирославе" class="full-image">
                 </div>
             </div>
 
-            <!-- НОВЫЙ СЛАЙД 11: Кот Миша с анимацией и стрелкой -->
+            <!-- СЛАЙД 11: Чиби-ПДД-тян с анимацией и стрелкой -->
             <div class="slide" style="justify-content: center; text-align: center;">
-                <h2 style="justify-content: center; margin-bottom: 0;">🐱 Знакомьтесь, это...</h2>
+                <h2 style="justify-content: center; margin-bottom: 0;" data-i18n="s11_title"></h2>
                 <div class="misha-container">
-                    <!-- Стрелка к коту -->
+                    <!-- Стрелка к персонажу -->
                     <div class="arrow-pointing">↘</div>
                     
-                    <!-- Файл должен называться cat.png и лежать рядом с index.html -->
-                    <img src="cat.png" alt="Кот Миша" class="cat-misha">
+                    <!-- Файл должен называться chibi.png и лежать рядом с index.html -->
+                    <img src="chibi.png" alt="ПДД-тян недовольно смотрит" class="cat-misha">
                     
                     <!-- Подпись -->
-                    <div class="misha-label">Миша</div>
+                    <div class="misha-label" data-i18n="s11_label">ПДД-тян</div>
+                    <div class="misha-sublabel" data-i18n="s11_sublabel">«Я вообще-то не специально так смотрю... б-бака!»</div>
                 </div>
             </div>
 
@@ -843,6 +852,10 @@
             s9_text: "Правила дорожного движения — это не формальность, а гарантия безопасности твоей и окружающих.",
             s9_accent: "🛑 Внимание, уважение и ответственность — залог безопасных дорог России... и моего спокойствия, между прочим!",
 
+            s11_title: "🐱 А вот и она — ПДД-тян!",
+            s11_label: "ПДД-тян",
+            s11_sublabel: "«Я вообще-то не специально так смотрю... б-бака!»",
+
             footer: "ПДД-тян недовольно объясняет правила ~ цундере-презентация (⁄ ⁄•⁄ω⁄•⁄ ⁄)"
         },
         en: {
@@ -938,6 +951,10 @@
             s9_tsun: 'D-don\'t think I\'m worried about you! Just... follow the rules, <span class="b-baka">b-baka!</span>',
             s9_text: "Traffic rules are not a formality — they guarantee your safety and the safety of others.",
             s9_accent: "🛑 Attention, respect and responsibility are the key to safe roads in Russia... and my peace of mind, by the way!",
+
+            s11_title: "🐱 And here she is — Traffic Rules-chan!",
+            s11_label: "Traffic Rules-chan",
+            s11_sublabel: "\"I'm not actually looking at you like that on purpose... b-baka!\"",
 
             footer: "Traffic Rules-chan reluctantly explains ~ tsundere presentation (⁄ ⁄•⁄ω⁄•⁄ ⁄)"
         }
